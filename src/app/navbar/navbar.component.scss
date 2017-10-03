@@ -1,0 +1,21 @@
+#sidenav {
+  padding: 20px;
+}
+
+#content {
+  padding: 20px;
+}
+
+#navbar {
+  a {
+    text-decoration: none;
+    text-align: center;
+    color: inherit;
+    flex: 1;
+  }
+}
+
+md-sidenav-container.app-dark {
+  background-color: black;
+  color: white;
+}

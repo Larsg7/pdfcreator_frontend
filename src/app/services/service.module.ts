@@ -4,7 +4,7 @@ import { TemplateService } from './template.service';
 import { UserService } from './user.service';
 
 @NgModule({
-  imports: [
+  providers: [
     ApiService,
     TemplateService,
     UserService,

@@ -7,14 +7,18 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
 import { PdfcreatorComponent } from './pdfcreator/pdfcreator.component';
 import { ServiceModule } from './services/service.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PdfcreatorComponent
+    PdfcreatorComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MaterialModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     ServiceModule,

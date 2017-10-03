@@ -1,0 +1,32 @@
+<md-sidenav-container style="height: 100%" [class.app-dark]="isDarkTheme" id="sidenav-container">
+  <md-sidenav #sidenav id="sidenav">
+    <md-list>
+        <md-list-item>
+          <md-icon mdListIcon>help_outline</md-icon>
+          <h3 mdLine>Hilfe</h3>
+        </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <md-toolbar id="navbar" color="primary" class="box-shadow-1">
+    <button md-icon-button (click)="sidenav.open()">
+      <md-icon>menu</md-icon>
+    </button>
+    <a [routerLink]="['/app']">{{ config.APP_NAME }}</a>
+
+    <button md-icon-button (click)="toggleTheme()">
+      <md-icon>format_color_fill</md-icon>
+    </button>
+    <button md-icon-button [mdMenuTriggerFor]="accMenu">
+      <md-icon>account_circle</md-icon>
+    </button>
+    <md-menu #accMenu="mdMenu">
+      <button md-menu-item> Einstellungen </button>
+      <button md-menu-item> Ausloggen </button>
+    </md-menu>
+
+  </md-toolbar>
+  <div id="content">
+    <ng-content></ng-content>
+  </div>
+</md-sidenav-container>
