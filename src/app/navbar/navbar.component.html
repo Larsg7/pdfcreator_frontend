@@ -1,4 +1,4 @@
-<md-sidenav-container style="height: 100%" [class.app-dark]="isDarkTheme" id="sidenav-container">
+<md-sidenav-container style="height: 100%" id="sidenav-container">
   <md-sidenav #sidenav id="sidenav">
     <md-list>
         <md-list-item>
@@ -14,15 +14,15 @@
     </button>
     <a [routerLink]="['/app']">{{ config.APP_NAME }}</a>
 
-    <button md-icon-button (click)="toggleTheme()">
+    <button md-icon-button (click)="theme.toggleTheme()">
       <md-icon>format_color_fill</md-icon>
     </button>
     <button md-icon-button [mdMenuTriggerFor]="accMenu">
       <md-icon>account_circle</md-icon>
     </button>
     <md-menu #accMenu="mdMenu">
-      <button md-menu-item> Einstellungen </button>
-      <button md-menu-item> Ausloggen </button>
+        <button md-menu-item> Einstellungen </button>
+        <button md-menu-item (click)="authService.token = ''"> Ausloggen </button>
     </md-menu>
 
   </md-toolbar>

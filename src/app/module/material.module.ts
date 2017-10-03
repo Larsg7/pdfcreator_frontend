@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
-  MdButtonModule, MdIconModule, MdListModule, MdMenuModule, MdSidenavModule,
+  MdButtonModule, MdDialogModule, MdFormFieldModule, MdIconModule, MdInputModule, MdListModule, MdMenuModule,
+  MdSidenavModule, MdSnackBarModule,
   MdToolbarModule
 } from '@angular/material';
 
@@ -12,6 +13,10 @@ import {
     MdIconModule,
     MdMenuModule,
     MdListModule,
+    MdDialogModule,
+    MdInputModule,
+    MdFormFieldModule,
+    MdSnackBarModule,
   ],
   exports: [
     MdButtonModule,
@@ -20,6 +25,10 @@ import {
     MdMenuModule,
     MdListModule,
     MdToolbarModule,
+    MdDialogModule,
+    MdInputModule,
+    MdFormFieldModule,
+    MdSnackBarModule,
   ]
 })
 export class MaterialModule {

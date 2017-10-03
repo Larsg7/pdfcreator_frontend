@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { AlertService } from '../services/alert.service';
+import { LoginDialogComponent } from '../dialogs/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-pdfcreator',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PdfcreatorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private alertService: AlertService) {
+    if (!this.authService.isUserLoggedIn()) {
+      this.alertService.showDialog(LoginDialogComponent, {});
+    }
+  }
 
   ngOnInit() {
   }
-
 }

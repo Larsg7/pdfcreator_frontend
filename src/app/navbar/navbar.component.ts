@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CONFIG } from '../../config';
+import { AuthService } from '../services/auth.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +11,11 @@ import { CONFIG } from '../../config';
 export class NavbarComponent implements OnInit {
 
   public config = CONFIG;
-  public isDarkTheme = false;
 
-  constructor() { }
+  constructor(public authService: AuthService,
+              public theme: ThemeService) { }
 
   ngOnInit() {
-    this.isDarkTheme = localStorage.getItem('isDarkTheme') === 'yes';
   }
 
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    localStorage.setItem('isDarkTheme', this.isDarkTheme ? 'yes' : 'no');
-  }
 }

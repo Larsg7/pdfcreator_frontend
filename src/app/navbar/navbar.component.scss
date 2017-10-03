@@ -1,3 +1,5 @@
+@import "../../variables";
+
 #sidenav {
   padding: 20px;
 }
@@ -15,7 +17,4 @@
   }
 }
 
-md-sidenav-container.app-dark {
-  background-color: black;
-  color: white;
-}
+

@@ -1,0 +1,14 @@
+<h2 md-dialog-title>Anmeldung</h2>
+<md-dialog-content>
+  <form class="example-form">
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Nutzername" name="username" [(ngModel)]="username">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Passwort" name="password" [(ngModel)]="password">
+    </md-form-field>
+  </form>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="login()" [disabled]="!username || !password">Einloggen</button>
+</md-dialog-actions>

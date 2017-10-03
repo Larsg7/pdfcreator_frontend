@@ -9,12 +9,14 @@ import { PdfcreatorComponent } from './pdfcreator/pdfcreator.component';
 import { ServiceModule } from './services/service.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DialogModule } from './dialogs/dialog.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     PdfcreatorComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,6 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MaterialModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     ServiceModule,
+    DialogModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
