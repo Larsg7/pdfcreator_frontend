@@ -110,7 +110,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 IF EXIST "%DEPLOYMENT_TARGET%\.angular-cli.json" (
   pushd "%DEPLOYMENT_TARGET%"
   echo Compiling project
-  call :ExecuteCmd .\node_modules\.bin\ng build  --prod
+  call :ExecuteCmd !NODE_EXE! .\node_modules\.bin\ng build  --prod
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
