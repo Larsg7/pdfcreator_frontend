@@ -101,8 +101,7 @@ call :SelectNodeVersion
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
   echo Installing packages
-  call :ExecuteCmd !NPM_CMD! install --production --scripts-prepend-node-path
-  call :ExecuteCmd !NPM_CMD! install --only=dev --scripts-prepend-node-path
+  call :ExecuteCmd "D:\Program Files (x86)\nodejs\8.5.0\node.exe" "D:\Program Files (x86)\npm\5.3.0\node_modules\npm\bin\npm-cli.js" install --scripts-prepend-node-path
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
@@ -110,7 +109,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 IF EXIST "%DEPLOYMENT_TARGET%\.angular-cli.json" (
   pushd "%DEPLOYMENT_TARGET%"
   echo Compiling project
-  call :ExecuteCmd !NODE_EXE! .\node_modules\.bin\ng build  --prod
+  call :ExecuteCmd "D:\Program Files (x86)\nodejs\8.5.0\node.exe" .\node_modules\.bin\ng build  --prod
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
