@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "prestart": "ng build  --prod",
+    "prestart": "./node_modules/.bin/ng build  --prod",
     "start": "node server/index.js",
     "build": "ng build",
     "test": "ng test",
