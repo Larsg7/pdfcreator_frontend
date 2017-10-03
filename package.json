@@ -2,6 +2,10 @@
   "name": "pdfcreatorfrontend",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": ">=6.11",
+    "npm": ">=4"
+  },
   "scripts": {
     "ng": "ng",
     "prestart": "ng build  --prod",
