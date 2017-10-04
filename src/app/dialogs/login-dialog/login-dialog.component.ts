@@ -13,12 +13,14 @@ export class LoginDialogComponent implements OnInit {
   password = '';
 
   constructor(private userService: UserService,
-              public dialogRef: MdDialogRef<LoginDialogComponent>) { }
+              public dialogRef: MdDialogRef<LoginDialogComponent>) {
+  }
 
   login() {
     this.userService.login(this.username, this.password).subscribe(
       () => { this.dialogRef.close(); },
-      () => {  },
+      () => {
+      },
     );
   }
 

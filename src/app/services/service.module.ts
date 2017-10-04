@@ -6,6 +6,7 @@ import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
 import { ThemeService } from './theme.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingService } from './loading.service';
 
 @NgModule({
   providers: [
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     AlertService,
     AuthService,
     ThemeService,
+    LoadingService,
   ],
   imports: [
     HttpClientModule,

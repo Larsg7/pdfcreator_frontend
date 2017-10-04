@@ -1,0 +1,11 @@
+<div>
+  <md-select [placeholder]="templateService.templates?.length > 0 ? 'Template auswählen' : 'Keine Templates vorhanden'"
+             id="template-select">
+    <md-option *ngFor="let template of templateService.templates" [value]="template.name">
+      {{ template.name }}
+    </md-option>
+  </md-select>
+</div>
+<button md-fab id="add-template-btn">
+  <md-icon>add</md-icon>
+</button>

@@ -9,10 +9,10 @@ export class AuthService implements OnInit {
   private _token: string;
 
   constructor(private alert: AlertService) {
+    this._token = localStorage.getItem('token');
   }
 
   ngOnInit() {
-    this._token = localStorage.getItem('token');
   }
 
   get token(): string {
@@ -24,19 +24,19 @@ export class AuthService implements OnInit {
     localStorage.setItem('token', this._token);
   }
 
+  public logout() {
+    this.token = '';
+  }
+
   public isUserLoggedIn() {
     const jwt = new JwtHelper();
 
     if (!this._token) return false;
 
     try {
-      return jwt.isTokenExpired(this._token);
+      return !jwt.isTokenExpired(this._token);
     } catch (e) {
       return false;
     }
-  }
-
-  public showLoginDialog() {
-    this.alert.showDialog(LoginDialogComponent, {});
   }
 }

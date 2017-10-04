@@ -6,14 +6,19 @@ import { CONFIG } from '../../config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { AuthService } from './auth.service';
+import { LoadingService } from './loading.service';
 
 @Injectable()
 export class ApiService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private authService: AuthService,
+              private loadingService: LoadingService) {
+  }
 
-  authorizeV1(username: string, password: string): Observable<User> {
-    return this.makeGraphQlQuery(`
+  authorizeV1(username: string, password: string): Observable<[string, User]> {
+    const request = this.makeGraphQlQuery(`
     mutation {
       mutation {
         authorize(username: "${username}", password: "${password}") {
@@ -31,6 +36,28 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'mutation', 'authorize'))
+      .map(res => res ? [res.token, User.fromApi(res.user)] : [])
+      .catch(this.handleError);
+    this.loadingService.addRequest(request);
+    return request;
+  }
+
+  activeUserV1(): Observable<User> {
+    return this.makeGraphQlQuery(`
+    query {
+      query(token: "${this.authService.token}") {
+        activeUser {
+            id
+            name
+            role
+            templates {
+              name
+            }
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .map(res => this.getData(res, 'data', 'query', 'activeUser'))
       .map(User.fromApi)
       .catch(this.handleError);
   }
@@ -53,5 +80,6 @@ export class ApiService {
     if (res && res.errors) {
       throw new Error(JSON.stringify(res.errors));
     }
+    return res;
   }
 }

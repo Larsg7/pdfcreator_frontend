@@ -21,8 +21,8 @@
       <md-icon>account_circle</md-icon>
     </button>
     <md-menu #accMenu="mdMenu">
-        <button md-menu-item> Einstellungen </button>
-        <button md-menu-item (click)="authService.token = ''"> Ausloggen </button>
+        <button md-menu-item disabled> {{ userService.user?.name }} </button>
+        <button md-menu-item (click)="logout()"> Ausloggen </button>
     </md-menu>
 
   </md-toolbar>
