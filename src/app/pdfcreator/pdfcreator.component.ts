@@ -13,7 +13,7 @@ export class PdfcreatorComponent implements OnInit {
   constructor(private authService: AuthService,
               private alertService: AlertService) {
     if (!this.authService.isUserLoggedIn()) {
-      this.alertService.showDialog(LoginDialogComponent, {});
+      this.alertService.showDialog(LoginDialogComponent, {}, true);
     }
   }
 

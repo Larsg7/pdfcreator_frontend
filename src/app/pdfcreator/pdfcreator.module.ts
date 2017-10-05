@@ -8,6 +8,7 @@ import { ServiceModule } from '../services/service.module';
 import { RouterModule } from '@angular/router';
 import { PDFCreatorRoutes } from './pdfcreator.routing';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MaterialModule,
     ServiceModule,
     RouterModule.forChild(PDFCreatorRoutes),
+    FormsModule,
   ],
   exports: [
     PdfcreatorComponent,

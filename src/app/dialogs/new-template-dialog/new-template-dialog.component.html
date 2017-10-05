@@ -1,0 +1,15 @@
+<h2 md-dialog-title>Neues Template</h2>
+<md-dialog-content>
+  <form id="new-template-form">
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Name" name="name" [(ngModel)]="name">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <textarea mdInput placeholder="Beschreibung" name="description" [(ngModel)]="description" rows="5"></textarea>
+    </md-form-field>
+  </form>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="submit()" [disabled]="!name">Erstellen</button>
+  <button md-button md-dialog-close>Schließen</button>
+</md-dialog-actions>

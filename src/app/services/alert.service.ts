@@ -15,14 +15,14 @@ export class AlertService {
     });
   }
 
-  showDialog(component: any, data: any): Promise<{}> {
+  showDialog(component: any, data: any, disableClose = false): Promise<any> {
     return new Promise((res, rej) => {
       const dialog = this.dialog.open(component, {
         data: data,
-        disableClose: true
+        disableClose: disableClose
       });
       dialog.afterClosed().subscribe(result => {
-        res();
+        res(result);
       });
     });
   }

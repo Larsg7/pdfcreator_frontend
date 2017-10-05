@@ -24,7 +24,7 @@
         <button md-menu-item disabled> {{ userService.user?.name }} </button>
         <button md-menu-item (click)="logout()"> Ausloggen </button>
     </md-menu>
-
+    <md-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></md-progress-bar>
   </md-toolbar>
   <div id="content">
     <ng-content></ng-content>

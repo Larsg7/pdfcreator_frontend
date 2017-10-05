@@ -1,11 +1,12 @@
 <div>
-  <md-select [placeholder]="templateService.templates?.length > 0 ? 'Template auswählen' : 'Keine Templates vorhanden'"
-             id="template-select">
-    <md-option *ngFor="let template of templateService.templates" [value]="template.name">
+  <md-select [placeholder]="templates?.length > 0 ? 'Template auswählen' : 'Keine Templates vorhanden'"
+             id="template-select" [(ngModel)]="currentTemplateId">
+    <md-option *ngFor="let template of templates" [value]="template.id">
       {{ template.name }}
     </md-option>
   </md-select>
+  <router-outlet></router-outlet>
 </div>
-<button md-fab id="add-template-btn">
+<button md-fab id="add-template-btn" (click)="newTemplate()">
   <md-icon>add</md-icon>
 </button>

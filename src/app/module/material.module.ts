@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import {
-  MdButtonModule, MdDialogModule, MdFormFieldModule, MdIconModule, MdInputModule, MdListModule, MdMenuModule,
+  MdButtonModule, MdCardModule, MdDialogModule, MdExpansionModule, MdFormFieldModule, MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdProgressBarModule,
   MdSelectModule,
   MdSidenavModule, MdSnackBarModule,
   MdToolbarModule
@@ -19,6 +23,9 @@ import {
     MdFormFieldModule,
     MdSnackBarModule,
     MdSelectModule,
+    MdProgressBarModule,
+    MdExpansionModule,
+    MdCardModule
   ],
   exports: [
     MdButtonModule,
@@ -32,6 +39,9 @@ import {
     MdFormFieldModule,
     MdSnackBarModule,
     MdSelectModule,
+    MdProgressBarModule,
+    MdExpansionModule,
+    MdCardModule
   ]
 })
 export class MaterialModule {

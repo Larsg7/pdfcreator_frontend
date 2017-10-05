@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { AuthService } from './auth.service';
 import { LoadingService } from './loading.service';
+import { Subject } from 'rxjs/Subject';
+import { Template } from '../models/template.model';
 
 @Injectable()
 export class ApiService {
@@ -28,6 +30,7 @@ export class ApiService {
             name
             role
             templates {
+              id
               name
             }
           }
@@ -38,12 +41,11 @@ export class ApiService {
       .map(res => this.getData(res, 'data', 'mutation', 'authorize'))
       .map(res => res ? [res.token, User.fromApi(res.user)] : [])
       .catch(this.handleError);
-    this.loadingService.addRequest(request);
-    return request;
+    return this.makeRequest(request);
   }
 
   activeUserV1(): Observable<User> {
-    return this.makeGraphQlQuery(`
+    const request = this.makeGraphQlQuery(`
     query {
       query(token: "${this.authService.token}") {
         activeUser {
@@ -51,6 +53,7 @@ export class ApiService {
             name
             role
             templates {
+              id
               name
             }
         }
@@ -60,6 +63,43 @@ export class ApiService {
       .map(res => this.getData(res, 'data', 'query', 'activeUser'))
       .map(User.fromApi)
       .catch(this.handleError);
+    return this.makeRequest(request);
+  }
+
+  newTemplateV1(template: Template, id: number | any): Observable<Template> {
+    const request = this.makeGraphQlQuery(`
+    mutation {
+      mutation(token: "${this.authService.token}") {
+        addTemplate(name: "${template.name}", description: "${template.description}", idUser: ${id}) {
+          id
+          name
+          description
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .map(res => this.getData(res, 'data', 'mutation', 'addTemplate'))
+      .map(Template.fromApi)
+      .catch(this.handleError);
+    return this.makeRequest(request);
+  }
+
+  getTemplateDetails(id: number): Observable<Template> {
+    const request = this.makeGraphQlQuery(`
+    query {
+      query(token: "${this.authService.token}") {
+        template(id: ${id}) {
+          id
+          name
+          description
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .map(res => this.getData(res, 'data', 'query', 'template'))
+      .map(Template.fromApi)
+      .catch(this.handleError);
+    return this.makeRequest(request);
   }
 
   private makeGraphQlQuery(query: string): Observable<any> {
@@ -82,4 +122,29 @@ export class ApiService {
     }
     return res;
   }
+
+  private makeRequest(req: Observable<any>): Observable<any> {
+    const loadingSub = new Subject();
+    const request = Observable.create(observer => {
+      req.subscribe(
+        res => {
+          observer.next(res);
+          loadingSub.next();
+        },
+        err => {
+          loadingSub.next();
+          observer.error(err);
+        },
+        () => {
+          observer.complete();
+          loadingSub.next();
+        }
+    );
+    });
+    this.loadingService.addRequest(loadingSub);
+
+    return request;
+  }
+
+
 }

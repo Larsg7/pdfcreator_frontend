@@ -3,6 +3,7 @@ import { CONFIG } from '../../../config';
 import { AuthService } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
 import { UserService } from '../../services/user.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(public authService: AuthService,
               public theme: ThemeService,
-              public userService: UserService) {
+              public userService: UserService,
+              public loadingService: LoadingService) {
   }
 
   public logout() {

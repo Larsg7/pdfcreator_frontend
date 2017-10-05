@@ -6,7 +6,8 @@ import { TemplatePickerComponent } from './template-picker/template-picker.compo
 export const PDFCreatorRoutes: Routes = [
   { path: 'app', component: PdfcreatorComponent, children:
     [
-      { path: '', component: TemplatePickerComponent },
-      { path: ':id', component: TemplateDisplayComponent },
+      { path: '', component: TemplatePickerComponent, children: [
+        { path: ':id', component: TemplateDisplayComponent },
+      ] },
     ] },
 ];
