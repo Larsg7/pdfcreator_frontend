@@ -1,7 +1,7 @@
 <div>
-  <md-select [placeholder]="templates?.length > 0 ? 'Template auswählen' : 'Keine Templates vorhanden'"
+  <md-select [placeholder]="(templateService.templates | async) ? 'Template auswählen' : 'Keine Templates vorhanden'"
              id="template-select" [(ngModel)]="currentTemplateId">
-    <md-option *ngFor="let template of templates" [value]="template.id">
+    <md-option *ngFor="let template of templateService.templates | async" [value]="template.id">
       {{ template.name }}
     </md-option>
   </md-select>

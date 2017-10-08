@@ -92,6 +92,7 @@ export class ApiService {
           id
           name
           description
+          document
         }
       }
     }
@@ -177,6 +178,7 @@ export class ApiService {
 
     return request;
   }
+
 
 
 }

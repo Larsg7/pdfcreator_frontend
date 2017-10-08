@@ -7,6 +7,7 @@ import { LoginDialogComponent } from '../dialogs/login-dialog/login-dialog.compo
 export class AuthService implements OnInit {
 
   private _token: string;
+  public userId: number;
 
   constructor(private alert: AlertService) {
     this._token = localStorage.getItem('token');

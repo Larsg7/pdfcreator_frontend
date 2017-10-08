@@ -31,7 +31,7 @@ export class TemplatePickerComponent implements OnInit {
               private nav: Router,
               public templateService: TemplateService,
               private route: ActivatedRoute) {
-    this.userService.templates.subscribe(templates => {
+    this.templateService.templates.subscribe(templates => {
       this.templates = templates;
       if (route.firstChild) {
         route.firstChild.params.subscribe(params => {
@@ -40,9 +40,6 @@ export class TemplatePickerComponent implements OnInit {
           }
         });
       }
-      this.templateService.activeTemplateSub.subscribe(template => {
-        this.updateTemplate(template);
-      })
     });
 
   }
@@ -56,12 +53,5 @@ export class TemplatePickerComponent implements OnInit {
         this.nav.navigate(['/app', id]);
       }
     });
-  }
-
-  private updateTemplate(template: Template) {
-    const index = this.templates.indexOf(this.templates.find(_ => _.id === template.id));
-    if (index !== -1) {
-      this.templates[index] = template;
-    }
   }
 }
