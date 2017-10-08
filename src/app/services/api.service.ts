@@ -102,6 +102,38 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
+  updateTemplate(template: Template): Observable<Template> {
+    const request = this.makeGraphQlQuery(`
+    mutation {
+      mutation(token: "${this.authService.token}") {
+        updateTemplate(id: ${template.id}, name: "${template.name}", description: "${template.description}") {
+          id
+          name
+          description
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .map(res => this.getData(res, 'data', 'mutation', 'updateTemplate'))
+      .map(Template.fromApi)
+      .catch(this.handleError);
+    return this.makeRequest(request);
+  }
+
+  deleteTemplate(template: Template): Observable<Template> {
+    const request = this.makeGraphQlQuery(`
+    mutation {
+      mutation(token: "${this.authService.token}") {
+        removeTemplate(id: ${template.id}) {
+          ok
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .catch(this.handleError);
+    return this.makeRequest(request);
+  }
+
   private makeGraphQlQuery(query: string): Observable<any> {
     return this.httpClient.post(`${CONFIG.API_URL}/api/v1/graphql`, query);
   }

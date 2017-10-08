@@ -40,6 +40,9 @@ export class TemplatePickerComponent implements OnInit {
           }
         });
       }
+      this.templateService.activeTemplateSub.subscribe(template => {
+        this.updateTemplate(template);
+      })
     });
 
   }
@@ -49,7 +52,16 @@ export class TemplatePickerComponent implements OnInit {
 
   newTemplate() {
     this.alert.showDialog(NewTemplateDialogComponent, {}).then(id => {
-      this.nav.navigate(['/app', id]);
+      if (id) {
+        this.nav.navigate(['/app', id]);
+      }
     });
+  }
+
+  private updateTemplate(template: Template) {
+    const index = this.templates.indexOf(this.templates.find(_ => _.id === template.id));
+    if (index !== -1) {
+      this.templates[index] = template;
+    }
   }
 }

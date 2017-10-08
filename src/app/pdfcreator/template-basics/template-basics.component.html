@@ -1,0 +1,10 @@
+<md-card id="template-display" *ngIf="templateService.activeTemplate">
+
+  <md-card-title>{{ templateService.activeTemplate?.name }}</md-card-title>
+  <md-card-content>{{ templateService.activeTemplate?.description }}</md-card-content>
+
+  <md-card-actions>
+    <button md-raised-button color="accent" (click)="edit()">Editieren</button>
+    <button md-raised-button color="warn" (click)="remove()">Löschen</button>
+  </md-card-actions>
+</md-card>

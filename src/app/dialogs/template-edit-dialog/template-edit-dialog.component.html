@@ -1,0 +1,13 @@
+<h2 md-dialog-title>Template bearbeiten</h2>
+<md-dialog-content>
+  <md-form-field>
+    <input mdInput placeholder="Name" name="name" [(ngModel)]="name">
+  </md-form-field>
+  <md-form-field>
+    <textarea mdInput placeholder="Beschreibung" name="description" [(ngModel)]="description" rows="5"></textarea>
+  </md-form-field>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="save()">Speichern</button>
+  <button md-button md-dialog-close>Schließen</button>
+</md-dialog-actions>

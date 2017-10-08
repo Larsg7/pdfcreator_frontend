@@ -24,6 +24,10 @@ export class UserService {
     templateService.activeTemplateSub.subscribe(template => {
       this.updateTemplate(template);
     });
+
+    templateService.removeTemplatesSub.subscribe((id) => {
+      this.deleteTemplate(id);
+    })
   }
 
   public login(username: string, password: string): Observable<any> {
@@ -74,9 +78,16 @@ export class UserService {
 
   private updateTemplate(template: Template) {
     const index = this._templates.indexOf(this._templates.find(_ => _.id === template.id));
-    if (index) {
+    if (index !== -1) {
       this._templates[index] = template;
       console.log('Updated template with id ' + template.id);
+    }
+  }
+
+  private deleteTemplate(id: number) {
+    const index = this._templates.indexOf(this._templates.find(_ => _.id === id));
+    if (index !== -1) {
+      this._templates.splice(index, 1);
     }
   }
 }

@@ -3,6 +3,7 @@ import { Template } from '../models/template.model';
 import { Subject } from 'rxjs/Subject';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class TemplateService {
@@ -11,14 +12,17 @@ export class TemplateService {
   }
 
   set activeTemplate(template: Template) {
-    this._activeTemplate = template;
-    this.getActiveTemplateDetails().subscribe(() => {
-      this.activeTemplateSub.next(this._activeTemplate);
-    });
+    if (!this.activeTemplate || (template && this.activeTemplate.id !== template.id)) {
+      this._activeTemplate = template;
+      this.getActiveTemplateDetails().subscribe(() => {
+        this.activeTemplateSub.next(this._activeTemplate);
+      });
+    }
   }
 
   private _activeTemplate: Template;
-  public activeTemplateSub: Subject<Template> = new Subject();
+  public activeTemplateSub: ReplaySubject<Template> = new ReplaySubject(1);
+  public removeTemplatesSub: Subject<number> = new Subject();
 
   constructor(private api: ApiService) {
   }
@@ -40,5 +44,16 @@ export class TemplateService {
       this._activeTemplate = template;
       obs.next(template);
     });
+  }
+
+  update() {
+    return this.api.updateTemplate(this.activeTemplate).map(template => {
+        this.activeTemplate = template;
+        this.activeTemplateSub.next(template);
+      });
+  }
+
+  remove() {
+    return this.api.deleteTemplate(this.activeTemplate).map(() => this.removeTemplatesSub.next(this.activeTemplate.id));
   }
 }
