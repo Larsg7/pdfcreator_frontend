@@ -21,7 +21,7 @@ import { PdfcreatorModule } from './pdfcreator/pdfcreator.module';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true}),
+    RouterModule.forRoot(appRoutes),
     ServiceModule,
     DialogModule,
     FormsModule,

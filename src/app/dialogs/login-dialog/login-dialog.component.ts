@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MdDialogRef } from '@angular/material';
+import { AlertService } from '../../services/alert.service';
+import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 
 @Component({
   selector: 'app-account-dialog',
@@ -13,7 +15,8 @@ export class LoginDialogComponent implements OnInit {
   password = '';
 
   constructor(private userService: UserService,
-              public dialogRef: MdDialogRef<LoginDialogComponent>) {
+              public dialogRef: MdDialogRef<LoginDialogComponent>,
+              public alert: AlertService) {
   }
 
   login() {
@@ -22,6 +25,10 @@ export class LoginDialogComponent implements OnInit {
       () => {
       },
     );
+  }
+
+  register() {
+    this.alert.showDialog(RegisterDialogComponent, {}, true).then(() => this.dialogRef.close());
   }
 
   ngOnInit() {

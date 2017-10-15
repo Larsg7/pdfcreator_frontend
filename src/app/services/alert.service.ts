@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MdDialog, MdSnackBar } from '@angular/material';
+import { ErrorDialogComponent } from '../dialogs/error-dialog/error-dialog.component';
 
 @Injectable()
 export class AlertService {
@@ -13,6 +14,10 @@ export class AlertService {
     this.snackBar.open(text, 'Schließen', {
       duration: duration,
     });
+  }
+
+  showError(message: string) {
+    return this.showDialog(ErrorDialogComponent, {message: message});
   }
 
   showDialog(component: any, data: any, disableClose = false): Promise<any> {

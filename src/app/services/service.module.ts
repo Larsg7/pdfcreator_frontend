@@ -10,10 +10,10 @@ import { LoadingService } from './loading.service';
 
 @NgModule({
   providers: [
+    AlertService,
     ApiService,
     TemplateService,
     UserService,
-    AlertService,
     AuthService,
     ThemeService,
     LoadingService,

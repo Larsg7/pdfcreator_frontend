@@ -10,13 +10,15 @@ import { AuthService } from './auth.service';
 import { LoadingService } from './loading.service';
 import { Subject } from 'rxjs/Subject';
 import { Template } from '../models/template.model';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class ApiService {
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
-              private loadingService: LoadingService) {
+              private loadingService: LoadingService,
+              private alert: AlertService) {
   }
 
   authorizeV1(username: string, password: string): Observable<[string, User]> {
@@ -66,6 +68,22 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
+  registerUserV1(username: string, password: string): Observable<number | null> {
+    const request = this.makeGraphQlQuery(`
+    mutation {
+      mutation {
+        addUser(username: "${username}", password: "${password}") {
+          id
+        }
+      }
+    }
+    `).map(this.checkForErrors)
+      .map(res => this.getData(res, 'data', 'mutation', 'addUser'))
+      .map(res => res ? res.id : null)
+      .catch(this.handleError);
+    return this.makeRequest(request);
+  }
+
   newTemplateV1(template: Template, id: number | any): Observable<Template> {
     const request = this.makeGraphQlQuery(`
     mutation {
@@ -84,7 +102,7 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  getTemplateDetails(id: number): Observable<Template> {
+  getTemplateDetailsV1(id: number): Observable<Template> {
     const request = this.makeGraphQlQuery(`
     query {
       query(token: "${this.authService.token}") {
@@ -103,7 +121,7 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  updateTemplate(template: Template): Observable<Template> {
+  updateTemplateV1(template: Template): Observable<Template> {
     const request = this.makeGraphQlQuery(`
     mutation {
       mutation(token: "${this.authService.token}") {
@@ -121,7 +139,7 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  deleteTemplate(template: Template): Observable<Template> {
+  deleteTemplateV1(template: Template): Observable<Template> {
     const request = this.makeGraphQlQuery(`
     mutation {
       mutation(token: "${this.authService.token}") {
@@ -146,6 +164,7 @@ export class ApiService {
 
   private handleError(error) {
     console.error(error);
+//    this.alert.showError(error);
     return Observable.throw(error);
   }
 

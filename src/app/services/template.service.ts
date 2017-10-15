@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { AuthService } from './auth.service';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class TemplateService {
@@ -28,30 +29,25 @@ export class TemplateService {
   public templates: ReplaySubject<Template[]> = new ReplaySubject(1);
 
   constructor(private api: ApiService,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private alert: AlertService) {
   }
 
   public getActiveTemplateDetails(): Observable<Template> {
     return Observable.create(obs => {
-      if (this.activeTemplate) {
         this.getActiveTemplateDetailsFromApi(obs);
-      } else {
-        this.activeTemplateSub.subscribe(() => {
-          this.getActiveTemplateDetailsFromApi(obs);
-        });
-      }
     });
   }
 
   private getActiveTemplateDetailsFromApi(obs) {
-    this.api.getTemplateDetails(this.activeTemplate.id).subscribe(template => {
+    this.api.getTemplateDetailsV1(this.activeTemplate.id).subscribe(template => {
       this._activeTemplate = template;
       obs.next(template);
-    });
+    }, this.handleError);
   }
 
   update() {
-    return this.api.updateTemplate(this.activeTemplate).map(template => {
+    return this.api.updateTemplateV1(this.activeTemplate).map(template => {
         this.updateTemplate(template);
         this.activeTemplate = template;
         this.activeTemplateSub.next(template);
@@ -59,7 +55,7 @@ export class TemplateService {
   }
 
   remove() {
-    return this.api.deleteTemplate(this.activeTemplate).map(() => {
+    return this.api.deleteTemplateV1(this.activeTemplate).map(() => {
       const index = this._templates.indexOf(this.activeTemplate);
       this._templates.splice(index, 1);
       this.templates.next(this._templates);
@@ -89,5 +85,9 @@ export class TemplateService {
   setTemplates(templates: Template[]) {
     this._templates = templates;
     this.templates.next(templates);
+  }
+
+  private handleError(err) {
+    this.alert.showSnack(err);
   }
 }
