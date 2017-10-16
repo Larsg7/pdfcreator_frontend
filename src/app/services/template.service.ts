@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Template } from '../models/template.model';
-import { Subject } from 'rxjs/Subject';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -88,6 +87,5 @@ export class TemplateService {
   }
 
   private handleError(err) {
-    this.alert.showSnack(err);
   }
 }

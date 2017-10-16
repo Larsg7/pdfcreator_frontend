@@ -10,6 +10,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { AccountDialogComponent } from './account-dialog/account-dialog.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { TemplateUploadDialogComponent } from './template-upload-dialog/template-upload-dialog.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     AccountDialogComponent,
     RegisterDialogComponent,
     ErrorDialogComponent,
+    TemplateUploadDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent,
@@ -29,6 +32,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     AccountDialogComponent,
     RegisterDialogComponent,
     ErrorDialogComponent,
+    TemplateUploadDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
   ],
   exports: [
     LoginDialogComponent,
@@ -45,6 +50,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     AccountDialogComponent,
     RegisterDialogComponent,
     ErrorDialogComponent,
+    TemplateUploadDialogComponent,
   ]
 })
 export class DialogModule { }

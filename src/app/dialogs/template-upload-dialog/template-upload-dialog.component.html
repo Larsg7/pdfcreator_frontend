@@ -1,0 +1,17 @@
+<h2 md-dialog-title>Template aktualisieren</h2>
+<md-dialog-content>
+  <p>Hier kannst du ein neues LaTeX Dokument hochladen. Bitte beachte dabei die folgenden Punkte:</p>
+  <ol>
+    <li>Das Dokument muss in einer <em>Zip</em> Datei vorliegen.</li>
+    <li>Das Dokument muss eine <em>main.tex</em> Datei enthalten, von der aus das Dokument kompiliert werden kann.</li>
+    <li>Alle Platzhalter und Variablen dürfen nur in der <em>main.tex</em> Datei eingefügt sein.</li>
+    <li>Das alte Dokument wird hierbei komplett und unwiederruflich überschrieben.</li>
+  </ol>
+
+  <label for="upload">Dokument</label>
+  <input type="file" id="upload" ng2FileSelect [uploader]="uploader">
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="upload()">Hochladen</button>
+  <button md-button md-dialog-close>Schließen</button>
+</md-dialog-actions>

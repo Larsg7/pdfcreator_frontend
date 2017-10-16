@@ -41,8 +41,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'mutation', 'authorize'))
-      .map(res => res ? [res.token, User.fromApi(res.user)] : [])
-      .catch(this.handleError);
+      .map(res => res ? [res.token, User.fromApi(res.user)] : []);
     return this.makeRequest(request);
   }
 
@@ -63,8 +62,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'query', 'activeUser'))
-      .map(User.fromApi)
-      .catch(this.handleError);
+      .map(User.fromApi);
     return this.makeRequest(request);
   }
 
@@ -79,8 +77,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'mutation', 'addUser'))
-      .map(res => res ? res.id : null)
-      .catch(this.handleError);
+      .map(res => res ? res.id : null);
     return this.makeRequest(request);
   }
 
@@ -97,8 +94,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'mutation', 'addTemplate'))
-      .map(Template.fromApi)
-      .catch(this.handleError);
+      .map(Template.fromApi);
     return this.makeRequest(request);
   }
 
@@ -116,8 +112,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'query', 'template'))
-      .map(Template.fromApi)
-      .catch(this.handleError);
+      .map(Template.fromApi);
     return this.makeRequest(request);
   }
 
@@ -134,8 +129,7 @@ export class ApiService {
     }
     `).map(this.checkForErrors)
       .map(res => this.getData(res, 'data', 'mutation', 'updateTemplate'))
-      .map(Template.fromApi)
-      .catch(this.handleError);
+      .map(Template.fromApi);
     return this.makeRequest(request);
   }
 
@@ -148,8 +142,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
-      .catch(this.handleError);
+    `).map(this.checkForErrors);
     return this.makeRequest(request);
   }
 
@@ -164,7 +157,7 @@ export class ApiService {
 
   private handleError(error) {
     console.error(error);
-//    this.alert.showError(error);
+    this.alert.showError(error);
     return Observable.throw(error);
   }
 
@@ -178,26 +171,27 @@ export class ApiService {
   private makeRequest(req: Observable<any>): Observable<any> {
     const loadingSub = new Subject();
     const request = Observable.create(observer => {
-      req.subscribe(
-        res => {
-          observer.next(res);
-          loadingSub.next();
-        },
-        err => {
-          loadingSub.next();
-          observer.error(err);
-        },
-        () => {
-          observer.complete();
-          loadingSub.next();
-        }
-    );
+      req
+        .catch(this.handleError.bind(this))
+        .subscribe(
+          res => {
+            observer.next(res);
+            loadingSub.next();
+          },
+          err => {
+            loadingSub.next();
+            observer.error(err);
+          },
+          () => {
+            observer.complete();
+            loadingSub.next();
+          }
+        );
     });
     this.loadingService.addRequest(loadingSub);
 
     return request;
   }
-
 
 
 }

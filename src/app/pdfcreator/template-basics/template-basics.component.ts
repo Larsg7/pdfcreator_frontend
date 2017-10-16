@@ -4,6 +4,7 @@ import { AlertService } from '../../services/alert.service';
 import { TemplateEditDialogComponent } from '../../dialogs/template-edit-dialog/template-edit-dialog.component';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { TemplateUploadDialogComponent } from '../../dialogs/template-upload-dialog/template-upload-dialog.component';
 
 @Component({
   selector: 'app-template-basics',
@@ -22,6 +23,10 @@ export class TemplateBasicsComponent implements OnInit {
 
   edit() {
     this.alert.showDialog(TemplateEditDialogComponent, {});
+  }
+
+  upload() {
+    this.alert.showDialog(TemplateUploadDialogComponent, {});
   }
 
   remove() {
