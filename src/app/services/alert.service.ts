@@ -10,7 +10,6 @@ export class AlertService {
   }
 
   showSnack(text: string, code = 1) {
-    console.log('SNACK')
     const duration = code === 0 ? 9000 : 5000;
     this.snackBar.open(text, 'Schließen', {
       duration: duration,

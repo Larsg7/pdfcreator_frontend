@@ -13,9 +13,11 @@ export class TemplateService {
   }
 
   set activeTemplate(template: Template) {
+    if (!template) return;
     if (!this.activeTemplate || (template && this.activeTemplate.id !== template.id)) {
-      this._activeTemplate = template;
-      this.getActiveTemplateDetails().subscribe(() => {
+      this.activeTemplateSub.next(template);
+      this.getActiveTemplateDetails(template.id).subscribe((templateWithDetails) => {
+        this._activeTemplate = templateWithDetails;
         this.activeTemplateSub.next(this._activeTemplate);
       });
     }
@@ -32,17 +34,8 @@ export class TemplateService {
               private alert: AlertService) {
   }
 
-  public getActiveTemplateDetails(): Observable<Template> {
-    return Observable.create(obs => {
-        this.getActiveTemplateDetailsFromApi(obs);
-    });
-  }
-
-  private getActiveTemplateDetailsFromApi(obs) {
-    this.api.getTemplateDetailsV1(this.activeTemplate.id).subscribe(template => {
-      this._activeTemplate = template;
-      obs.next(template);
-    }, this.handleError);
+  public getActiveTemplateDetails(id: number): Observable<Template> {
+    return this.api.getTemplateDetailsV1(id);
   }
 
   update() {
@@ -73,7 +66,6 @@ export class TemplateService {
 
   private updateTemplate(template: Template) {
     const index = this._templates.indexOf(this._templates.find(_ => _.id === template.id));
-    console.log(index)
     if (index !== -1) {
       this._templates[index] = template;
       console.log('Updated template with id ' + template.id);
@@ -84,8 +76,5 @@ export class TemplateService {
   setTemplates(templates: Template[]) {
     this._templates = templates;
     this.templates.next(templates);
-  }
-
-  private handleError(err) {
   }
 }

@@ -39,7 +39,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'mutation', 'authorize'))
       .map(res => res ? [res.token, User.fromApi(res.user)] : []);
     return this.makeRequest(request);
@@ -60,7 +60,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'query', 'activeUser'))
       .map(User.fromApi);
     return this.makeRequest(request);
@@ -75,7 +75,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'mutation', 'addUser'))
       .map(res => res ? res.id : null);
     return this.makeRequest(request);
@@ -92,7 +92,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'mutation', 'addTemplate'))
       .map(Template.fromApi);
     return this.makeRequest(request);
@@ -110,7 +110,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'query', 'template'))
       .map(Template.fromApi);
     return this.makeRequest(request);
@@ -127,7 +127,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors)
+    `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'mutation', 'updateTemplate'))
       .map(Template.fromApi);
     return this.makeRequest(request);
@@ -142,7 +142,7 @@ export class ApiService {
         }
       }
     }
-    `).map(this.checkForErrors);
+    `).map(this.checkForErrors.bind(this));
     return this.makeRequest(request);
   }
 
@@ -155,15 +155,14 @@ export class ApiService {
     return res;
   }
 
-  private handleError(error) {
-    console.error(error);
-    this.alert.showError(error);
-    return Observable.throw(error);
+  private handleError(error: Error) {
+    console.error(error.message);
+    this.alert.showError(error.message);
   }
 
   private checkForErrors(res) {
     if (res && res.errors) {
-      throw new Error(JSON.stringify(res.errors));
+      this.handleError(new Error(JSON.stringify(res.errors)));
     }
     return res;
   }

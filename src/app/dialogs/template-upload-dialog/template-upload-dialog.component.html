@@ -7,9 +7,11 @@
     <li>Alle Platzhalter und Variablen dürfen nur in der <em>main.tex</em> Datei eingefügt sein.</li>
     <li>Das alte Dokument wird hierbei komplett und unwiederruflich überschrieben.</li>
   </ol>
-
-  <label for="upload">Dokument</label>
-  <input type="file" id="upload" ng2FileSelect [uploader]="uploader">
+  <div *ngIf="uploader; else loading">
+    <label for="upload">Dokument</label>
+    <input type="file" id="upload" ng2FileSelect [uploader]="uploader">
+  </div>
+  <ng-template #loading>Lade...</ng-template>
 </md-dialog-content>
 <md-dialog-actions>
   <button md-button (click)="upload()">Hochladen</button>
