@@ -6,6 +6,11 @@
   <md-card-actions>
     <button md-raised-button color="accent" (click)="edit()"><md-icon>edit</md-icon> Editieren</button>
     <button md-raised-button color="accent" (click)="upload()"><md-icon>file_upload</md-icon> Dokument hochladen</button>
+    <a [href]="templateLink" download *ngIf="templateService.activeTemplate?.document">
+      <button md-raised-button color="accent" (click)="download()">
+        <md-icon>download</md-icon> Dokument herunterladen
+      </button>
+    </a>
     <button md-raised-button color="warn" (click)="remove()"><md-icon>delete</md-icon> Löschen</button>
   </md-card-actions>
 </md-card>

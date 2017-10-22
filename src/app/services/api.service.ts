@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { CONFIG } from '../../config';
 
 import 'rxjs/add/operator/map';
@@ -163,6 +163,14 @@ export class ApiService {
       }
     }
     `).map(this.checkForErrors.bind(this));
+    return this.makeRequest(request);
+  }
+
+  downloadTemplateLinkV1(template): Observable<string> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    const request = this.httpClient.get(`${CONFIG.API_URL}/api/v1/document/download/${template.id}`, {
+      headers: headers
+    }).map((res: {link: string}) => res.link);
     return this.makeRequest(request);
   }
 

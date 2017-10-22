@@ -7,7 +7,7 @@ import { AlertService } from '../../services/alert.service';
 import { MdDialogRef } from '@angular/material';
 
 function uploadUrl(id: number) {
-  return CONFIG.API_URL + '/api/v1/uploadTemplate/' + id;
+  return CONFIG.API_URL + '/api/v1/document/' + id;
 }
 
 @Component({
