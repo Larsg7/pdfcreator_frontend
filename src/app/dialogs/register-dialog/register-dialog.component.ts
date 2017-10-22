@@ -38,7 +38,7 @@ export class RegisterDialogComponent implements OnInit {
     const email: string = this.newUserForm.get('email').value;
     const password: string = this.newUserForm.get('password').value;
 
-    this.api.registerUserV1(username, password).subscribe(id => {
+    this.api.registerUserV1(username, password, email).subscribe(id => {
       if (id) {
         this.authNewUser(username, password);
       }

@@ -1,3 +1,56 @@
-<p>
-  account-dialog works!
-</p>
+<h2 md-dialog-title>Account</h2>
+<md-dialog-content>
+  <md-expansion-panel>
+    <md-expansion-panel-header>
+      <md-panel-title>
+        Nutzername
+      </md-panel-title>
+      <md-panel-description>
+        {{ user.pluck('name') | async }}
+      </md-panel-description>
+    </md-expansion-panel-header>
+    <form [formGroup]="userForm" *ngIf="userForm">
+      <md-form-field>
+        <input placeholder="Nutzername" mdInput formControlName="username">
+      </md-form-field>
+    </form>
+  </md-expansion-panel>
+
+  <md-expansion-panel>
+    <md-expansion-panel-header>
+      <md-panel-title>
+        Email
+      </md-panel-title>
+      <md-panel-description>
+        {{ user.pluck('email') | async }}
+      </md-panel-description>
+    </md-expansion-panel-header>
+    <form [formGroup]="userForm" *ngIf="userForm">
+      <md-form-field>
+        <input placeholder="Deine E-Mail" mdInput formControlName="email">
+      </md-form-field>
+    </form>
+  </md-expansion-panel>
+
+  <md-expansion-panel>
+    <md-expansion-panel-header>
+      <md-panel-title>
+        Password
+      </md-panel-title>
+    </md-expansion-panel-header>
+    <form [formGroup]="userForm" *ngIf="userForm">
+      <md-form-field>
+        <input placeholder="Neues Password" mdInput type="password" formControlName="password">
+      </md-form-field>
+      <md-form-field>
+        <input placeholder="Password bestätigen" mdInput type="password" formControlName="passwordConfirm">
+      </md-form-field>
+    </form>
+  </md-expansion-panel>
+
+
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-raised-button color="primary" (click)="save()" [disabled]="userForm.invalid || userForm.pristine">Speichern</button>
+  <button md-button md-dialog-close>Schließen</button>
+</md-dialog-actions>

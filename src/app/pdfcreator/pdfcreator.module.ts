@@ -10,6 +10,7 @@ import { PDFCreatorRoutes } from './pdfcreator.routing';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { TemplateBasicsComponent } from './template-basics/template-basics.component';
+import { TemplatePlaceholdersComponent } from './template-placeholders/template-placeholders.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { TemplateBasicsComponent } from './template-basics/template-basics.compo
     TemplateDisplayComponent,
     TemplatePickerComponent,
     TemplateBasicsComponent,
+    TemplatePlaceholdersComponent,
     NavbarComponent,
   ],
   imports: [

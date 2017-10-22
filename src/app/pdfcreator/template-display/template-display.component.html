@@ -1,5 +1,18 @@
 <div id="template-display">
   <app-template-basics></app-template-basics>
-  <object *ngIf="safeUri" [data]="safeUri"></object>
-
+  <div *ngIf="templateService.activeTemplate">
+    <div id="template-view" *ngIf="templateService.activeTemplate?.document; else noDocument">
+      <div class="template-view-item" *ngIf="templateService.activeTemplate?.document">
+        <app-template-placeholders></app-template-placeholders>
+      </div>
+      <div class="template-view-item">
+        <object *ngIf="safeUri" [data]="safeUri" id="template-document"></object>
+      </div>
+    </div>
+    <ng-template #noDocument>
+      <div id="template-upload">
+        <p>Kein Dokument vorhanden.</p>
+      </div>
+    </ng-template>
+  </div>
 </div>

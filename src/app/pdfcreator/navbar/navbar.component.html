@@ -21,7 +21,7 @@
       <md-icon>account_circle</md-icon>
     </button>
     <md-menu #accMenu="mdMenu">
-        <button md-menu-item disabled> {{ (userService.user | async)?.name }} </button>
+        <button md-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }} </button>
         <button md-menu-item (click)="logout()"> Ausloggen </button>
     </md-menu>
     <md-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></md-progress-bar>

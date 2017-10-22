@@ -18,6 +18,10 @@ export class TemplatePickerComponent implements OnInit {
   }
 
   set currentTemplateId(id: number) {
+    if (this._currentTemplateId === id) {
+      return;
+    }
+
     this.templateService.activeTemplate = this.templates.find(_ => _.id === id);
     this.nav.navigate(['/app', id]);
     this._currentTemplateId = id;

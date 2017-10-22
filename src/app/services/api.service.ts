@@ -29,6 +29,7 @@ export class ApiService {
           token
           user {
             id
+            email
             name
             role
             templates {
@@ -51,6 +52,7 @@ export class ApiService {
       query(token: "${this.authService.token}") {
         activeUser {
             id
+            email
             name
             role
             templates {
@@ -66,11 +68,11 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  registerUserV1(username: string, password: string): Observable<number | null> {
+  registerUserV1(username: string, password: string, email: string): Observable<number | any> {
     const request = this.makeGraphQlQuery(`
     mutation {
       mutation {
-        addUser(username: "${username}", password: "${password}") {
+        addUser(username: "${username}", password: "${password}", email: "${email}") {
           id
         }
       }
@@ -78,6 +80,24 @@ export class ApiService {
     `).map(this.checkForErrors.bind(this))
       .map(res => this.getData(res, 'data', 'mutation', 'addUser'))
       .map(res => res ? res.id : null);
+    return this.makeRequest(request);
+  }
+
+  updateUserV1(id: number, username: string, password: string, email: string): Observable<User> {
+    const request = this.makeGraphQlQuery(`
+    mutation {
+      mutation(token: "${this.authService.token}") {
+        updateUser(id: ${id}, username: "${username}", password: "${password}", email: "${email}") {
+          id
+          email
+          name
+          role
+        }
+      }
+    }
+    `).map(this.checkForErrors.bind(this))
+      .map(res => this.getData(res, 'data', 'mutation', 'updateUser'))
+      .map(res => User.fromApi(res));
     return this.makeRequest(request);
   }
 

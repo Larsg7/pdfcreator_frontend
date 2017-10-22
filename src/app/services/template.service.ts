@@ -30,8 +30,7 @@ export class TemplateService {
   public templates: ReplaySubject<Template[]> = new ReplaySubject(1);
 
   constructor(private api: ApiService,
-              private auth: AuthService,
-              private alert: AlertService) {
+              private auth: AuthService) {
   }
 
   public getActiveTemplateDetails(id: number): Observable<Template> {

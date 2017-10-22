@@ -1,3 +1,22 @@
 #template-display {
   margin-top: 30px;
+  position: relative;
+  min-height: 80vh;
+
+  #template-view {
+    margin-top: 30px;
+    columns: 2 500px; // IE 10 compatible!
+  }
+
+  #template-document {
+    width: 100%;
+    height: 500px;
+    resize: vertical;
+    overflow: hidden;
+  }
+}
+
+#template-upload {
+  margin-top: 10vh;
+  text-align: center;
 }
