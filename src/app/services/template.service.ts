@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { AuthService } from './auth.service';
 import { AlertService } from './alert.service';
+import { TemplateField } from '../models/template-fields';
 
 @Injectable()
 export class TemplateService {
@@ -16,10 +17,7 @@ export class TemplateService {
     if (!template) return;
     if (!this.activeTemplate || (template && this.activeTemplate.id !== template.id)) {
       this.activeTemplateSub.next(template);
-      this.getActiveTemplateDetails(template.id).subscribe((templateWithDetails) => {
-        this._activeTemplate = templateWithDetails;
-        this.activeTemplateSub.next(this._activeTemplate);
-      });
+      this.reloadTemplate(template);
     }
   }
 
@@ -33,8 +31,16 @@ export class TemplateService {
               private auth: AuthService) {
   }
 
-  public getActiveTemplateDetails(id: number): Observable<Template> {
-    return this.api.getTemplateDetailsV1(id);
+  public reloadTemplate(template?: Template) {
+    template = template ? template : this.activeTemplate;
+    this.getActiveTemplateDetails(template.id, template.fields).subscribe((templateWithDetails) => {
+      this._activeTemplate = templateWithDetails;
+      this.activeTemplateSub.next(this._activeTemplate);
+    });
+  }
+
+  private getActiveTemplateDetails(id: number, fields: TemplateField[]): Observable<Template> {
+    return this.api.getTemplateDetailsV1(id, fields);
   }
 
   update() {

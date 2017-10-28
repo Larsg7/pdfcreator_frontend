@@ -25,7 +25,7 @@ export class NewTemplateDialogComponent implements OnInit {
   }
 
   submit() {
-    const template = new Template(0, this.name, this.description, null);
+    const template = new Template(0, this.name, this.description, null, null);
     this.templateService.createNewTemplateForUser(template).subscribe((newTemplate) => {
       this.alert.showSnack(`Template "${this.name}" erstellt.`);
       this.templateService.activeTemplate = newTemplate;

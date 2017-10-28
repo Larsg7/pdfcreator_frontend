@@ -1,3 +1,10 @@
-<p>
-  template-placeholders works!
-</p>
+<div *ngIf="templateService.activeTemplate?.fields?.length; else noFields">
+  <md-form-field *ngFor="let field of templateService.activeTemplate?.fields">
+    <input mdInput [placeholder]="field.content" [(ngModel)]="field.replacement">
+    <md-hint align="start">{{ field.description }}</md-hint>
+  </md-form-field>
+  <button md-button md-raised-button color="primary" (click)="reload()">Neu laden</button>
+</div>
+<ng-template #noFields>
+  <p>Keine Platzhalter oder Variablen gefunden.</p>
+</ng-template>

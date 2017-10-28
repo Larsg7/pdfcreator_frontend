@@ -6,6 +6,10 @@
   #template-view {
     margin-top: 30px;
     columns: 2 500px; // IE 10 compatible!
+
+    .template-view-item {
+      padding-bottom: 10px;
+    }
   }
 
   #template-document {

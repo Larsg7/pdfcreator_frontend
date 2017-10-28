@@ -1,8 +1,11 @@
+import { TemplateField, TemplateFieldApiModel } from './template-fields';
+
 export interface TemplateApiModel {
   id?: number;
   name?: string;
   description?: string;
   document?: string;
+  fields?: TemplateFieldApiModel[];
 }
 
 export class Template {
@@ -13,6 +16,7 @@ export class Template {
       r.name,
       r.description,
       r.document,
+      r.fields ? r.fields.map(f => TemplateField.fromApi(f)) : null,
     );
   }
 
@@ -22,12 +26,14 @@ export class Template {
       name: this.name,
       description: this.description,
       document: this.document,
+      fields: this.fields ? this.fields.map(f => f.toApi()) : null,
     };
   }
 
   constructor(public id: number | undefined,
               public name: string | undefined,
               public description: string | undefined,
-              public document: string | undefined) {
+              public document: string | undefined,
+              public fields: TemplateField[] | undefined) {
   }
 }

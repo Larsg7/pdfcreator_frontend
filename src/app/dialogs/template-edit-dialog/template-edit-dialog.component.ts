@@ -31,8 +31,9 @@ export class TemplateEditDialogComponent implements OnInit {
     this.templateService.activeTemplate.name = this.name;
     this.templateService.activeTemplate.description = this.description;
     this.templateService.update().subscribe(() => {
-      this.dialogRef.close();
+      this.templateService.reloadTemplate();
       this.alert.showSnack('Template gespeichert.');
+      this.dialogRef.close();
     })
   }
 

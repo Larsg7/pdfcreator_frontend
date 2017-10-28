@@ -13,4 +13,12 @@ export class TemplatePlaceholdersComponent implements OnInit {
   ngOnInit() {
   }
 
+  reload() {
+    // this.templateService.activeTemplate.fields = this.templateService.activeTemplate.fields.map(f => {
+    //   f.replacement = "Test";
+    //   return f;
+    // })
+    this.templateService.reloadTemplate(this.templateService.activeTemplate);
+  }
+
 }

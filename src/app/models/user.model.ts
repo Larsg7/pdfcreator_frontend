@@ -28,8 +28,8 @@ export class User {
       name: this.name,
       role: this.role,
       email: this.email,
-      template: this.template,
-      templates: this.templates,
+      template: this.template.toApi(),
+      templates: this.templates ? this.templates.map(t => t.toApi()) : null,
     };
   }
 

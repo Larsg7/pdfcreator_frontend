@@ -38,6 +38,7 @@ export class TemplateUploadDialogComponent implements OnInit {
         this.alert.showError('Es gab ein Problem beim Hochladen der Datei.');
       } else {
         this.alert.showSnack('Dokument hochgeladen.');
+        this.templateService.reloadTemplate()
         this.dialogRef.close();
       }
     };

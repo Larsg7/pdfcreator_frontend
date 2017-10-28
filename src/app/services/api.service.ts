@@ -11,6 +11,7 @@ import { LoadingService } from './loading.service';
 import { Subject } from 'rxjs/Subject';
 import { Template } from '../models/template.model';
 import { AlertService } from './alert.service';
+import { TemplateField } from '../models/template-fields';
 
 @Injectable()
 export class ApiService {
@@ -118,7 +119,14 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  getTemplateDetailsV1(id: number): Observable<Template> {
+  getTemplateDetailsV1(id: number, fields: TemplateField[] = []): Observable<Template> {
+    const apiFields = fields ? fields.map(f => f.toApi()) : [];
+    // FIXME
+    const fieldsJson = JSON.stringify(apiFields).replace(/"/g, '\\"')
+      .replace(/content/g, 'Content')
+      .replace(/replacement/g, 'Replacement')
+      .replace(/comment/g, 'Comment');
+
     const request = this.makeGraphQlQuery(`
     query {
       query(token: "${this.authService.token}") {
@@ -126,7 +134,8 @@ export class ApiService {
           id
           name
           description
-          document
+          document(fields: "${fieldsJson}")
+          fields
         }
       }
     }
