@@ -3,6 +3,8 @@ import { UserService } from '../../services/user.service';
 import { MdDialogRef } from '@angular/material';
 import { AlertService } from '../../services/alert.service';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PasswordForgotDialogComponent } from '../password-forgot-dialog/password-forgot-dialog.component';
 
 @Component({
   selector: 'app-account-dialog',
@@ -11,17 +13,30 @@ import { RegisterDialogComponent } from '../register-dialog/register-dialog.comp
 })
 export class LoginDialogComponent implements OnInit {
 
-  username = '';
-  password = '';
+  formGroup: FormGroup;
 
   constructor(private userService: UserService,
               public dialogRef: MdDialogRef<LoginDialogComponent>,
-              public alert: AlertService) {
+              public alert: AlertService,
+              private formBuilder: FormBuilder) {
+    this.formGroup = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   login() {
-    this.userService.login(this.username, this.password).subscribe(
-      () => { this.dialogRef.close(); },
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    const username = this.formGroup.get('username').value;
+    const password = this.formGroup.get('password').value;
+
+    this.userService.login(username, password).subscribe(
+      () => {
+        this.dialogRef.close();
+      },
       () => {
       },
     );
@@ -34,4 +49,7 @@ export class LoginDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  forgotPassword() {
+    this.alert.showDialog(PasswordForgotDialogComponent, {}, true);
+  }
 }

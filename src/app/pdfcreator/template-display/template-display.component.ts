@@ -24,7 +24,7 @@ export class TemplateDisplayComponent implements OnInit {
   ngOnInit() {
   }
 
-  private makeSafeURL(unsafe: string): SafeUrl {
+  public makeSafeURL(unsafe: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(unsafe);
   }
 }

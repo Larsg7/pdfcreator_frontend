@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplateService } from '../../services/template.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { TemplateDisplayComponent } from '../template-display/template-display.component';
 
 @Component({
   selector: 'app-template-placeholders',
@@ -8,7 +10,8 @@ import { TemplateService } from '../../services/template.service';
 })
 export class TemplatePlaceholdersComponent implements OnInit {
 
-  constructor(public templateService: TemplateService) { }
+  constructor(public templateService: TemplateService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -21,4 +24,9 @@ export class TemplatePlaceholdersComponent implements OnInit {
     this.templateService.reloadTemplate(this.templateService.activeTemplate);
   }
 
+  getDocumentDownload() {
+    if (this.templateService.activeTemplate) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(this.templateService.activeTemplate.document);
+    }
+  }
 }

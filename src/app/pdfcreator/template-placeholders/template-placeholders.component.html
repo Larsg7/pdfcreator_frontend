@@ -3,7 +3,10 @@
     <input mdInput [placeholder]="field.content" [(ngModel)]="field.replacement">
     <md-hint align="start">{{ field.description }}</md-hint>
   </md-form-field>
-  <button md-button md-raised-button color="primary" (click)="reload()">Neu laden</button>
+  <button md-button md-raised-button color="primary" (click)="reload()"><md-icon>refresh</md-icon></button>
+  <a [href]="getDocumentDownload()" [download]="templateService.activeTemplate?.name">
+    <button md-button md-raised-button color="primary"><md-icon>file_download</md-icon></button>
+  </a>
 </div>
 <ng-template #noFields>
   <p>Keine Platzhalter oder Variablen gefunden.</p>

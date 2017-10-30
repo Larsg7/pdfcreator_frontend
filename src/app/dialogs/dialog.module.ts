@@ -12,6 +12,7 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { TemplateUploadDialogComponent } from './template-upload-dialog/template-upload-dialog.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PasswordForgotDialogComponent } from './password-forgot-dialog/password-forgot-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     RegisterDialogComponent,
     ErrorDialogComponent,
     TemplateUploadDialogComponent,
+    PasswordForgotDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent,
@@ -33,6 +35,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     RegisterDialogComponent,
     ErrorDialogComponent,
     TemplateUploadDialogComponent,
+    PasswordForgotDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     RegisterDialogComponent,
     ErrorDialogComponent,
     TemplateUploadDialogComponent,
+    PasswordForgotDialogComponent,
   ]
 })
 export class DialogModule { }
