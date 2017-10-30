@@ -6,7 +6,7 @@ import {
   MdMenuModule,
   MdProgressBarModule,
   MdSelectModule,
-  MdSidenavModule, MdSnackBarModule,
+  MdSidenavModule, MdSnackBarModule, MdTableModule,
   MdToolbarModule, MdTooltipModule
 } from '@angular/material';
 
@@ -27,6 +27,7 @@ import {
     MdExpansionModule,
     MdCardModule,
     MdTooltipModule,
+    MdTableModule,
   ],
   exports: [
     MdButtonModule,
@@ -44,6 +45,7 @@ import {
     MdExpansionModule,
     MdCardModule,
     MdTooltipModule,
+    MdTableModule,
   ]
 })
 export class MaterialModule {

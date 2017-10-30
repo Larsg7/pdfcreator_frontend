@@ -39,7 +39,7 @@ export class TemplateService {
     });
   }
 
-  private getActiveTemplateDetails(id: number, fields: TemplateField[]): Observable<Template> {
+  private getActiveTemplateDetails(id: number, fields: TemplateField[][]): Observable<Template> {
     return this.api.getTemplateDetailsV1(id, fields);
   }
 

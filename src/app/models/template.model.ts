@@ -16,7 +16,7 @@ export class Template {
       r.name,
       r.description,
       r.document,
-      r.fields ? r.fields.map(f => TemplateField.fromApi(f)) : null,
+      r.fields ? [r.fields.map(f => TemplateField.fromApi(f))] : null,
     );
   }
 
@@ -26,7 +26,7 @@ export class Template {
       name: this.name,
       description: this.description,
       document: this.document,
-      fields: this.fields ? this.fields.map(f => f.toApi()) : null,
+      fields: this.fields ? this.fields.map(f => f.map(_ => _.toApi()))[0] : null,
     };
   }
 
@@ -34,6 +34,6 @@ export class Template {
               public name: string | undefined,
               public description: string | undefined,
               public document: string | undefined,
-              public fields: TemplateField[] | undefined) {
+              public fields: TemplateField[][] | undefined) {
   }
 }

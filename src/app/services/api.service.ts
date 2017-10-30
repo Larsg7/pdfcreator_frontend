@@ -119,8 +119,8 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
-  getTemplateDetailsV1(id: number, fields: TemplateField[] = []): Observable<Template> {
-    const apiFields = fields ? fields.map(f => f.toApi()) : [];
+  getTemplateDetailsV1(id: number, fields: TemplateField[][] = []): Observable<Template> {
+    const apiFields = fields ? fields.map(f => f.map(_ => _.toApi())) : [];
     // FIXME
     const fieldsJson = JSON.stringify(apiFields).replace(/"/g, '\\"')
       .replace(/content/g, 'Content')

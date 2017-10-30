@@ -1,9 +1,10 @@
 <div *ngIf="templateService.activeTemplate?.fields?.length; else noFields">
-  <md-form-field *ngFor="let field of templateService.activeTemplate?.fields">
+  <md-form-field *ngFor="let field of templateService.activeTemplate?.fields[0]">
     <input mdInput [placeholder]="field.content" [(ngModel)]="field.replacement">
     <md-hint align="start">{{ field.description }}</md-hint>
   </md-form-field>
   <button md-button md-raised-button color="primary" (click)="reload()"><md-icon>refresh</md-icon></button>
+  <button md-button md-raised-button color="primary" (click)="series()"><md-icon>content_copy</md-icon></button>
   <a [href]="getDocumentDownload()" [download]="templateService.activeTemplate?.name">
     <button md-button md-raised-button color="primary"><md-icon>file_download</md-icon></button>
   </a>
