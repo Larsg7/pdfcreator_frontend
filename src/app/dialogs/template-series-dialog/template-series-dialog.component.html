@@ -1,0 +1,29 @@
+<h2 md-dialog-title>Eine Serie von Templates erstellen</h2>
+<md-dialog-content>
+  <p>Bitte beachte die folgenden Punkte:</p>
+  <ul>
+    <li>TODO</li>
+  </ul>
+  <input type="file" (change)="onCSVFileChange($event)">
+
+  <div *ngIf="csvFileJson">
+    <md-table #table [dataSource]="tableDataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container mdColumnDef="{{ key }}" *ngFor="let key of csvFileKeys">
+        <md-header-cell *mdHeaderCellDef>{{ key }}</md-header-cell>
+        <md-cell *mdCellDef="let element"> {{element[key]}} </md-cell>
+      </ng-container>
+
+      <md-header-row *mdHeaderRowDef="csvFileKeys"></md-header-row>
+      <md-row *mdRowDef="let row; columns: csvFileKeys;"></md-row>
+    </md-table>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button [disabled]="!fileOk" (click)="generate()">Generieren</button>
+  <button md-button md-dialog-close>Schließen</button>
+</md-dialog-actions>
