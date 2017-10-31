@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TableDecoderService } from '../../services/table-decoder.service';
 import { TemplateService } from '../../services/template.service';
 import { AlertService } from '../../services/alert.service';
@@ -24,11 +24,17 @@ export class TemplateSeriesDialogComponent implements OnInit {
   public tableDataSubject: ReplaySubject<JSON[]> = new ReplaySubject(1);
   public tableDataSource = new TemplateDataSource(this.tableDataSubject);
 
+  @ViewChild('fileUpload') fileInput: ElementRef;
+
   constructor(private templateService: TemplateService,
               private alert: AlertService,
               public dialogRef: MdDialogRef<TemplateSeriesDialogComponent>) { }
 
   ngOnInit() {
+  }
+
+  chooseFile() {
+    this.fileInput.nativeElement.click();
   }
 
   generate() {
@@ -53,7 +59,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
     if (!this.csvFile) {
       return;
     }
-    if (!this.csvFile.type.match(/text.*/)) {
+    if (!this.csvFile.type.match(/text.*/) && this.csvFile.type !== '') {
       this.alert.showSnack('Dieser Filetyp wird nicht unterstützt.');
       this.csvFile = null;
       return;
@@ -74,6 +80,31 @@ export class TemplateSeriesDialogComponent implements OnInit {
     reader.readAsText(this.csvFile);
   }
 
+  exampleCsv() {
+    const fields = this.templateService.activeTemplate.fields[0];
+    const header = fields.map(field => `"${field.content}"`).join(', ');
+    const row = fields.map(_ => '"..."').join(', ');
+    return header + '\n' + row + '\n' + row;
+  }
+
+  addRow() {
+    this.csvFileJson.push(JSON.parse('{}'));
+    this.tableDataSubject.next(this.csvFileJson);
+  }
+
+  deleteRow(element: any) {
+    const index = this.csvFileJson.findIndex(_ => _ == element);
+    if (index !== -1) {
+      this.csvFileJson.splice(index, 1);
+    }
+    this.tableDataSubject.next(this.csvFileJson);
+  }
+
+  createTable() {
+    this.csvFileKeys = this.templateService.activeTemplate.fields[0].map(_ => _.content);
+    this.csvFileJson = [];
+    this.addRow();
+  }
 }
 
 export class TemplateDataSource extends DataSource<any> {

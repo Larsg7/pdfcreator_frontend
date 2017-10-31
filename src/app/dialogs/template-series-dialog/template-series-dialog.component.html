@@ -2,28 +2,44 @@
 <md-dialog-content>
   <p>Bitte beachte die folgenden Punkte:</p>
   <ul>
-    <li>TODO</li>
+    <li>Du kannst eine <strong>CSV</strong> Datei hochladen, wobei die Namen der Spalten alle Platzhalter/Variablen im Template abdecken müssen.</li>
+    <li>Eine solche Datei kann z.B. mit Excel oder LibreOffice erstellt werden.</li>
+    <li>Die Werte einer Zeile müssen durch ein Kommar getrennt werden.</li>
+    <li>Einzelne Werte müssen mit <strong>"</strong> eingegrenzt sein.</li>
   </ul>
-  <input type="file" (change)="onCSVFileChange($event)">
+  <p>Hier ist ein Beispiel:</p>
+  <pre style="margin-left: 20px">
+{{ exampleCsv() }}
+  </pre>
+  <input type="file" (change)="onCSVFileChange($event)" #fileUpload hidden>
+  <button md-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
+  <button md-raised-button (click)="createTable()" color="accent">Tabelle manuell erzeugen</button>
 
-  <div *ngIf="csvFileJson">
+  <div *ngIf="csvFileJson && csvFileJson.length">
     <md-table #table [dataSource]="tableDataSource">
-
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ng-container mdColumnDef="{{ key }}" *ngFor="let key of csvFileKeys">
         <md-header-cell *mdHeaderCellDef>{{ key }}</md-header-cell>
-        <md-cell *mdCellDef="let element"> {{element[key]}} </md-cell>
+        <md-cell *mdCellDef="let element">
+          <md-form-field class="table-form-field">
+            <input mdInput [(ngModel)]="element[key]">
+          </md-form-field>
+        </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="delete">
+        <md-header-cell *mdHeaderCellDef [ngClass]="'delete-cell'">Löschen</md-header-cell>
+        <md-cell *mdCellDef="let element" [ngClass]="'delete-cell'">
+          <button (click)="deleteRow(element)" md-icon-button><md-icon>remove_circle</md-icon></button>
+        </md-cell>
       </ng-container>
 
       <md-header-row *mdHeaderRowDef="csvFileKeys"></md-header-row>
-      <md-row *mdRowDef="let row; columns: csvFileKeys;"></md-row>
+      <md-row *mdRowDef="let row; columns: csvFileKeys.concat(['delete']);"></md-row>
     </md-table>
+    <button md-raised-button color="accent" style="margin: 10px 0 10px 0" (click)="addRow()">Zeile hinzufügen</button>
   </div>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button [disabled]="!fileOk" (click)="generate()">Generieren</button>
+  <button md-button [disabled]="!csvFileJson || csvFileJson.length == 0" (click)="generate()">Generieren</button>
   <button md-button md-dialog-close>Schließen</button>
 </md-dialog-actions>
