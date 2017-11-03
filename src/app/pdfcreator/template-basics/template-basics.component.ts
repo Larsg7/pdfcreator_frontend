@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dia
 import { Router } from '@angular/router';
 import { TemplateUploadDialogComponent } from '../../dialogs/template-upload-dialog/template-upload-dialog.component';
 import { ApiService } from '../../services/api.service';
+import { CONFIG } from '../../../config';
 
 @Component({
   selector: 'app-template-basics',
@@ -20,9 +21,13 @@ export class TemplateBasicsComponent implements OnInit {
               private alert: AlertService,
               private nav: Router,
               private api: ApiService) {
+
   }
 
   ngOnInit() {
+    this.templateService.activeTemplateSub.subscribe(template => {
+      this.templateLink = `${CONFIG.API_URL}/api/v1/document/${template.token}`;
+    });
   }
 
   edit() {
@@ -31,10 +36,6 @@ export class TemplateBasicsComponent implements OnInit {
 
   upload() {
     this.alert.showDialog(TemplateUploadDialogComponent, {});
-  }
-
-  download() {
-    this.api.downloadTemplateLinkV1(this.templateService.activeTemplate).subscribe(link => this.templateLink = link);
   }
 
   remove() {

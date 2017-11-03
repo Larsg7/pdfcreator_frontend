@@ -6,6 +6,7 @@ export interface TemplateApiModel {
   description?: string;
   document?: string;
   fields?: TemplateFieldApiModel[];
+  token?: string;
 }
 
 export class Template {
@@ -17,6 +18,7 @@ export class Template {
       r.description,
       r.document,
       r.fields ? [r.fields.map(f => TemplateField.fromApi(f))] : null,
+      r.token,
     );
   }
 
@@ -27,6 +29,7 @@ export class Template {
       description: this.description,
       document: this.document,
       fields: this.fields ? this.fields.map(f => f.map(_ => _.toApi()))[0] : null,
+      token: this.token,
     };
   }
 
@@ -34,6 +37,7 @@ export class Template {
               public name: string | undefined,
               public description: string | undefined,
               public document: string | undefined,
-              public fields: TemplateField[][] | undefined) {
+              public fields: TemplateField[][] | undefined,
+              public token: string | undefined) {
   }
 }

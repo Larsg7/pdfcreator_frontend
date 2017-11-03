@@ -10,11 +10,11 @@
     <button md-raised-button color="accent" (click)="upload()" mdTooltip="LaTeX Dokument hochladen">
       <md-icon>file_upload</md-icon>
     </button>
-    <!--<a [href]="templateLink" download *ngIf="templateService.activeTemplate?.document">-->
-      <button md-raised-button color="accent" (click)="download()" disabled mdTooltip="LaTeX Dokument herunterladen">
+    <a [href]="templateLink" [download]="templateService.activeTemplate?.name" *ngIf="templateService.activeTemplate?.document">
+      <button md-raised-button color="accent" mdTooltip="LaTeX Dokument herunterladen">
         <md-icon>file_download</md-icon>
       </button>
-    <!--</a>-->
+    </a>
     <button md-raised-button color="warn" (click)="remove()" mdTooltip="Template Löschen">
       <md-icon>delete</md-icon>
     </button>

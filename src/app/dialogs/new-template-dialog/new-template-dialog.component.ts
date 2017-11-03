@@ -13,7 +13,7 @@ import { TemplateService } from '../../services/template.service';
 export class NewTemplateDialogComponent implements OnInit {
 
   name: string;
-  description: string;
+  description = '';
 
   constructor(private userService: UserService,
               private alert: AlertService,
@@ -25,11 +25,11 @@ export class NewTemplateDialogComponent implements OnInit {
   }
 
   submit() {
-    const template = new Template(0, this.name, this.description, null, null);
+    const template = new Template(0, this.name, this.description, null, null, null);
     this.templateService.createNewTemplateForUser(template).subscribe((newTemplate) => {
       this.alert.showSnack(`Template "${this.name}" erstellt.`);
       this.templateService.activeTemplate = newTemplate;
       this.dialogRef.close(newTemplate.id);
-    }, error2 => {});
+    });
   }
 }

@@ -136,6 +136,7 @@ export class ApiService {
           description
           document(fields: "${fieldsJson}")
           fields
+          token
         }
       }
     }

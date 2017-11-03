@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {
-  MdButtonModule, MdCardModule, MdDialogModule, MdExpansionModule, MdFormFieldModule, MdIconModule,
+  MdButtonModule, MdCardModule, MdDialogModule, MdExpansionModule, MdFormFieldModule, MdGridListModule, MdIconModule,
   MdInputModule,
   MdListModule,
   MdMenuModule,
   MdProgressBarModule,
   MdSelectModule,
-  MdSidenavModule, MdSnackBarModule, MdTableModule,
+  MdSidenavModule, MdSliderModule, MdSnackBarModule, MdTableModule,
   MdToolbarModule, MdTooltipModule
 } from '@angular/material';
 
@@ -28,6 +28,8 @@ import {
     MdCardModule,
     MdTooltipModule,
     MdTableModule,
+    MdGridListModule,
+    MdSliderModule,
   ],
   exports: [
     MdButtonModule,
@@ -46,6 +48,8 @@ import {
     MdCardModule,
     MdTooltipModule,
     MdTableModule,
+    MdGridListModule,
+    MdSliderModule,
   ]
 })
 export class MaterialModule {

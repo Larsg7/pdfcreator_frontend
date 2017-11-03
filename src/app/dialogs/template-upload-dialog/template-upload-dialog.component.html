@@ -8,12 +8,22 @@
     <li>Das alte Dokument wird hierbei komplett und unwiederruflich überschrieben.</li>
   </ol>
   <div *ngIf="uploader; else loading">
-    <label for="upload">Dokument</label>
-    <input type="file" id="upload" ng2FileSelect [uploader]="uploader">
+    <button md-raised-button color="primary" (click)="chooseDocument()">Dokument auswählen</button>
+    <input type="file" id="upload" ng2FileSelect [uploader]="uploader" hidden #fileInput>
+  </div>
+  <div *ngIf="uploader.queue.length">
+    <md-grid-list cols="3" rowHeight="4:1">
+      <md-grid-tile>
+        <span>{{ uploader.queue[0].file.name }}</span>
+      </md-grid-tile>
+      <md-grid-tile colspan="2">
+        <md-progress-bar [value]="uploader.progress"></md-progress-bar>
+      </md-grid-tile>
+    </md-grid-list>
   </div>
   <ng-template #loading>Lade...</ng-template>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button (click)="upload()">Hochladen</button>
+  <button md-button (click)="upload()" [disabled]="!uploader.queue.length">Hochladen</button>
   <button md-button md-dialog-close>Schließen</button>
 </md-dialog-actions>

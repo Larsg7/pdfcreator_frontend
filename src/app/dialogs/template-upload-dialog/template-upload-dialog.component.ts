@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CONFIG } from '../../../config';
 import { FileUploader } from 'ng2-file-upload';
 import { TemplateService } from '../../services/template.service';
@@ -18,6 +18,7 @@ function uploadUrl(id: number) {
 export class TemplateUploadDialogComponent implements OnInit {
 
   public uploader: FileUploader;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private templateService: TemplateService,
               private authService: AuthService,
@@ -43,5 +44,9 @@ export class TemplateUploadDialogComponent implements OnInit {
       }
     };
     this.uploader.uploadAll();
+  }
+
+  chooseDocument() {
+    this.fileInput.nativeElement.click();
   }
 }
