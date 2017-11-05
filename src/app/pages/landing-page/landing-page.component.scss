@@ -1,30 +1,97 @@
-#landing-page-container {
-  padding: 50px;
+@import "../../../theme.scss";
 
-  #header {
-    height: 30vh;
+#landing-page-container {
+  .call-to-action-btn {
+    width: 200px;
+    height: 40px;
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .section {
+    padding: 30px 30px;
+  }
+
+  #header-background {
+    background: url("../../../assets/pexels-photo-261599.small.png") center no-repeat;
+    filter: blur(3px);
+    position: fixed;
+    left: -5%;
+    top: -5%;
+    height: 110%;
+    width: 110%;
+    z-index: -1;
+  }
+
+  #header-section {
+    height: 100vh;
     position: relative;
 
-    #title {
+    #title-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      font-size: large;
+      width: 100%;
     }
   }
 
-  #features {
-    padding-top: 50px;
-    height: 30vh;
+  #description-section {
+    background-color: map_get($creator-app-primary, default);
+    font-size: large;
+    text-align: center;
+    #app-showcase-pic {
+      max-width: 100%;
+      width: 1000px;
+    }
+  }
+
+  #features-section {
+    text-align: center;
+    width: 100%;
+    $padding-sides: 5vw;
+
+    padding-left: $padding-sides;
+    padding-right: $padding-sides;
+
+    background-color: map_get($creator-app-primary, default);
 
     .feature-item {
-      mat-icon {
-        font-size: 50px;
-        display: block;
-        margin: auto;
+      height: 300px;
+      margin-bottom: 30px;
+      text-align: center;
+
+      #icon {
+        $size: 60px;
+        padding: 10px;
+
+        mat-icon {
+          font-size: $size;
+          height: $size;
+          width: $size;
+        }
       }
-      
+
+      #name {
+        height: 50px;
+        text-align: center;
+      }
+      #description {
+        margin-bottom: 5px;
+      }
     }
+  }
+
+  #footer {
+    text-align: center;
+    background-color: map_get($creator-app-accent, lighter);
+  }
+
+  .divider {
+    height: 200px;
   }
 }

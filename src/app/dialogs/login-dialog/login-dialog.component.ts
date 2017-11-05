@@ -35,21 +35,22 @@ export class LoginDialogComponent implements OnInit {
 
     this.userService.login(username, password).subscribe(
       () => {
-        this.dialogRef.close();
-      },
-      () => {
-      },
+        this.alert.showSnack('Du bist eingeloggt.');
+        this.dialogRef.close(true);
+      }
     );
   }
 
   register() {
-    this.alert.showDialog(RegisterDialogComponent, {}, true).then(() => this.dialogRef.close());
+    this.alert.showDialog(RegisterDialogComponent, {}).then((res) => {
+      if (res) this.dialogRef.close(true);
+    });
   }
 
   ngOnInit() {
   }
 
   forgotPassword() {
-    this.alert.showDialog(PasswordForgotDialogComponent, {}, true);
+    this.alert.showDialog(PasswordForgotDialogComponent, {});
   }
 }

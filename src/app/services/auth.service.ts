@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 import { AlertService } from './alert.service';
-import { LoginDialogComponent } from '../dialogs/login-dialog/login-dialog.component';
 
 @Injectable()
 export class AuthService implements OnInit {

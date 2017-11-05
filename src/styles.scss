@@ -2,6 +2,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "assets/bootstrap-grid/bootstrap.min.css";
 
+* {
+  box-sizing: border-box;
+}
+
 body, html {
   margin: 0;
   height: 100%;
@@ -45,4 +49,9 @@ mat-dialog-container {
 
 .mt-1 {
   margin-top: 1rem;
+}
+
+.link-no-decoration {
+  text-decoration: none;
+  color: inherit;
 }

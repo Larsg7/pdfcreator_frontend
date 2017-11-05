@@ -47,7 +47,7 @@ export class RegisterDialogComponent implements OnInit {
 
   private authNewUser(username: string, password: string) {
     this.userService.login(username, password).subscribe(user => {
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     })
   }
 }
