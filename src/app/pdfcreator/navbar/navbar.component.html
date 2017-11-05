@@ -1,36 +1,36 @@
-<md-sidenav-container style="height: 100%">
-  <md-sidenav #sidenav id="sidenav">
-    <md-nav-list>
+<mat-sidenav-container style="height: 100%">
+  <mat-sidenav #sidenav id="sidenav">
+    <mat-nav-list>
       <a [routerLink]="['/app/help']" mat-list-item (click)="sidenav.close()">
-        <md-icon mdListIcon>help_outline</md-icon>
-        <h3 mdLine>Hilfe</h3>
+        <mat-icon matListIcon>help_outline</mat-icon>
+        <h3 matLine>Hilfe</h3>
       </a>
       <a [routerLink]="['/app/about']" mat-list-item (click)="sidenav.close()">
-        <md-icon mdListIcon>info_outline</md-icon>
-        <h3 mdLine>Impressum</h3>
+        <mat-icon matListIcon>info_outline</mat-icon>
+        <h3 matLine>Impressum</h3>
       </a>
-    </md-nav-list>
-  </md-sidenav>
+    </mat-nav-list>
+  </mat-sidenav>
 
-  <md-toolbar id="navbar" color="primary" class="box-shadow-1">
-    <button md-icon-button (click)="sidenav.open()">
-      <md-icon>menu</md-icon>
+  <mat-toolbar id="navbar" color="primary" class="box-shadow-1">
+    <button mat-icon-button (click)="sidenav.open()">
+      <mat-icon>menu</mat-icon>
     </button>
     <a [routerLink]="['/app']">{{ config.APP_NAME }}</a>
 
-    <button md-icon-button (click)="theme.toggleTheme()">
-      <md-icon>format_color_fill</md-icon>
+    <button mat-icon-button (click)="theme.toggleTheme()">
+      <mat-icon>format_color_fill</mat-icon>
     </button>
-    <button md-icon-button [mdMenuTriggerFor]="accMenu">
-      <md-icon>account_circle</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="accMenu">
+      <mat-icon>account_circle</mat-icon>
     </button>
-    <md-menu #accMenu="mdMenu">
-      <button md-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }}</button>
-      <button md-menu-item (click)="logout()"> Ausloggen</button>
-    </md-menu>
-    <md-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></md-progress-bar>
-  </md-toolbar>
+    <mat-menu #accMenu="matMenu">
+      <button mat-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }}</button>
+      <button mat-menu-item (click)="logout()"> Ausloggen</button>
+    </mat-menu>
+    <mat-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></mat-progress-bar>
+  </mat-toolbar>
   <div id="content">
     <ng-content></ng-content>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>

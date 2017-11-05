@@ -1,5 +1,5 @@
-<h2 md-dialog-title>Template aktualisieren</h2>
-<md-dialog-content>
+<h2 mat-dialog-title>Template aktualisieren</h2>
+<mat-dialog-content>
   <p>Hier kannst du ein neues LaTeX Dokument hochladen. Bitte beachte dabei die folgenden Punkte:</p>
   <ol>
     <li>Das Dokument muss in einer <em>Zip</em> Datei vorliegen.</li>
@@ -8,22 +8,22 @@
     <li>Das alte Dokument wird hierbei komplett und unwiederruflich überschrieben.</li>
   </ol>
   <div *ngIf="uploader; else loading">
-    <button md-raised-button color="primary" (click)="chooseDocument()">Dokument auswählen</button>
+    <button mat-raised-button color="primary" (click)="chooseDocument()">Dokument auswählen</button>
     <input type="file" id="upload" ng2FileSelect [uploader]="uploader" hidden #fileInput>
   </div>
   <div *ngIf="uploader.queue.length">
-    <md-grid-list cols="3" rowHeight="4:1">
-      <md-grid-tile>
+    <mat-grid-list cols="3" rowHeight="4:1">
+      <mat-grid-tile>
         <span>{{ uploader.queue[0].file.name }}</span>
-      </md-grid-tile>
-      <md-grid-tile colspan="2">
-        <md-progress-bar [value]="uploader.progress"></md-progress-bar>
-      </md-grid-tile>
-    </md-grid-list>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <mat-progress-bar [value]="uploader.progress"></mat-progress-bar>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
   <ng-template #loading>Lade...</ng-template>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button (click)="upload()" [disabled]="!uploader.queue.length">Hochladen</button>
-  <button md-button md-dialog-close>Schließen</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="upload()" [disabled]="!uploader.queue.length">Hochladen</button>
+  <button mat-button mat-dialog-close>Schließen</button>
+</mat-dialog-actions>

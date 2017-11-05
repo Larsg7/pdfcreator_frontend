@@ -1,18 +1,18 @@
 <div *ngIf="templateService.activeTemplate?.fields?.length; else noFields">
-  <md-form-field *ngFor="let field of templateService.activeTemplate?.fields[0]">
-    <input mdInput [placeholder]="field.content" [(ngModel)]="field.replacement">
-    <md-hint align="start">{{ field.description }}</md-hint>
-  </md-form-field>
+  <mat-form-field *ngFor="let field of templateService.activeTemplate?.fields[0]">
+    <input matInput [placeholder]="field.content" [(ngModel)]="field.replacement">
+    <mat-hint align="start">{{ field.description }}</mat-hint>
+  </mat-form-field>
   <div class="mt-1">
-    <button md-button md-raised-button color="primary" (click)="reload()" mdTooltip="Dokument neu laden">
-      <md-icon>refresh</md-icon>
+    <button mat-button mat-raised-button color="primary" (click)="reload()" matTooltip="Dokument neu laden">
+      <mat-icon>refresh</mat-icon>
     </button>
-    <button md-button md-raised-button color="primary" (click)="series()" mdTooltip="Serie des Dokuments erstellen">
-      <md-icon>content_copy</md-icon>
+    <button mat-button mat-raised-button color="primary" (click)="series()" matTooltip="Serie des Dokuments erstellen">
+      <mat-icon>content_copy</mat-icon>
     </button>
     <a [href]="getDocumentDownload()" [download]="templateService.activeTemplate?.name">
-      <button md-button md-raised-button color="primary" mdTooltip="Dokument herunterladen">
-        <md-icon>file_download</md-icon>
+      <button mat-button mat-raised-button color="primary" matTooltip="Dokument herunterladen">
+        <mat-icon>file_download</mat-icon>
       </button>
     </a>
   </div>

@@ -5,7 +5,7 @@ import { User } from '../../models/user.model';
 import 'rxjs/add/operator/pluck';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { matchOtherValidator } from '../register-dialog/register-dialog.component';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { AlertService } from '../../services/alert.service';
 
 
@@ -20,7 +20,7 @@ export class AccountDialogComponent implements OnInit {
   userForm: FormGroup;
 
   constructor(private userService: UserService,
-              public dialogRef: MdDialogRef<AccountDialogComponent>,
+              public dialogRef: MatDialogRef<AccountDialogComponent>,
               private formBuilder: FormBuilder,
               private alert: AlertService) {
     this.createForm();

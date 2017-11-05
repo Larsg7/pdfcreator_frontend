@@ -1,12 +1,15 @@
 <div>
-  <md-select [placeholder]="(templateService.templates | async)?.length ? 'Template auswählen' : 'Keine Templates vorhanden'"
-             id="template-select" [(ngModel)]="currentTemplateId">
-    <md-option *ngFor="let template of templateService.templates | async" [value]="template.id">
-      {{ template.name }}
-    </md-option>
-  </md-select>
+  <mat-form-field>
+    <mat-select
+      [placeholder]="(templateService.templates | async)?.length ? 'Template auswählen' : 'Keine Templates vorhanden'"
+      id="template-select" [(ngModel)]="currentTemplateId">
+      <mat-option *ngFor="let template of templateService.templates | async" [value]="template.id">
+        {{ template.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <router-outlet></router-outlet>
 </div>
-<button md-fab id="add-template-btn" (click)="newTemplate()">
-  <md-icon>add</md-icon>
+<button mat-fab id="add-template-btn" (click)="newTemplate()">
+  <mat-icon>add</mat-icon>
 </button>

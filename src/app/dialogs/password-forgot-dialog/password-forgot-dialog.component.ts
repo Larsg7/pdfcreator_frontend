@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { matchOtherValidator } from '../register-dialog/register-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { CONFIG } from '../../../config';
@@ -20,7 +20,7 @@ export class PasswordForgotDialogComponent implements OnInit {
   readonly authUrl = `${CONFIG.API_URL}/api/v1/password`;
   readonly resetUrl = `${CONFIG.API_URL}/api/v1/password/reset`;
 
-  constructor(public dialogRef: MdDialogRef<PasswordForgotDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<PasswordForgotDialogComponent>,
               private formBuilder: FormBuilder,
               private http: HttpClient,
               private alert: AlertService) {

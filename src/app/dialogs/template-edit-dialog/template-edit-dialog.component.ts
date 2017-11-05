@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplateService } from '../../services/template.service';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { AlertService } from '../../services/alert.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class TemplateEditDialogComponent implements OnInit {
   description: string;
 
   constructor(public templateService: TemplateService,
-              public dialogRef: MdDialogRef<TemplateEditDialogComponent>,
+              public dialogRef: MatDialogRef<TemplateEditDialogComponent>,
               private alert: AlertService) {
     templateService.activeTemplateSub.subscribe(template => {
       if (template) {

@@ -4,7 +4,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { TemplateService } from '../../services/template.service';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 function uploadUrl(id: number) {
   return CONFIG.API_URL + '/api/v1/document/' + id;
@@ -23,7 +23,7 @@ export class TemplateUploadDialogComponent implements OnInit {
   constructor(private templateService: TemplateService,
               private authService: AuthService,
               private alert: AlertService,
-              public dialogRef: MdDialogRef<TemplateUploadDialogComponent>) {
+              public dialogRef: MatDialogRef<TemplateUploadDialogComponent>) {
   }
 
   ngOnInit() {

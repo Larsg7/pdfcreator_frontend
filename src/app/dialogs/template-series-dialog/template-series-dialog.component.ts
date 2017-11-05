@@ -6,8 +6,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { TemplateField } from '../../models/template-fields';
-import { Template } from '../../models/template.model';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-template-series-dialog',
@@ -28,7 +27,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
 
   constructor(private templateService: TemplateService,
               private alert: AlertService,
-              public dialogRef: MdDialogRef<TemplateSeriesDialogComponent>) { }
+              public dialogRef: MatDialogRef<TemplateSeriesDialogComponent>) { }
 
   ngOnInit() {
   }

@@ -1,15 +1,15 @@
-<h2 md-dialog-title>Neues Template</h2>
-<md-dialog-content>
+<h2 mat-dialog-title>Neues Template</h2>
+<mat-dialog-content>
   <form>
-    <md-form-field>
-      <input mdInput placeholder="Name" name="name" [(ngModel)]="name">
-    </md-form-field>
-    <md-form-field>
-      <textarea mdInput placeholder="Beschreibung" name="description" [(ngModel)]="description" rows="5"></textarea>
-    </md-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name" name="name" [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Beschreibung" name="description" [(ngModel)]="description" rows="5"></textarea>
+    </mat-form-field>
   </form>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button (click)="submit()" [disabled]="!name">Erstellen</button>
-  <button md-button md-dialog-close>Schließen</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="submit()" [disabled]="!name">Erstellen</button>
+  <button mat-button mat-dialog-close>Schließen</button>
+</mat-dialog-actions>

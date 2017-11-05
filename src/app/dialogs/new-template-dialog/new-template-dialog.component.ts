@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Template } from '../../models/template.model';
 import { AlertService } from '../../services/alert.service';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { TemplateService } from '../../services/template.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class NewTemplateDialogComponent implements OnInit {
 
   constructor(private userService: UserService,
               private alert: AlertService,
-              public dialogRef: MdDialogRef<NewTemplateDialogComponent>,
+              public dialogRef: MatDialogRef<NewTemplateDialogComponent>,
               private templateService: TemplateService) {
   }
 

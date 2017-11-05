@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { tryCatch } from 'rxjs/util/tryCatch';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-error-dialog',
@@ -11,8 +10,8 @@ export class ErrorDialogComponent implements OnInit {
 
   message: any;
 
-  constructor(public dialogRef: MdDialogRef<ErrorDialogComponent>,
-              @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<ErrorDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     const message = data ? data.message : '';
     try {
       this.message = JSON.parse(message);

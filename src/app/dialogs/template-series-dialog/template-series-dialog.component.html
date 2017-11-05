@@ -1,5 +1,5 @@
-<h2 md-dialog-title>Eine Serie von Templates erstellen</h2>
-<md-dialog-content>
+<h2 mat-dialog-title>Eine Serie von Templates erstellen</h2>
+<mat-dialog-content>
   <p>Bitte beachte die folgenden Punkte:</p>
   <ul>
     <li>Du kannst eine <strong>CSV</strong> Datei hochladen, wobei die Namen der Spalten alle Platzhalter/Variablen im Template abdecken müssen.</li>
@@ -12,34 +12,34 @@
 {{ exampleCsv() }}
   </pre>
   <input type="file" (change)="onCSVFileChange($event)" #fileUpload hidden>
-  <button md-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
-  <button md-raised-button (click)="createTable()" color="accent">Tabelle manuell erzeugen</button>
+  <button mat-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
+  <button mat-raised-button (click)="createTable()" color="accent">Tabelle manuell erzeugen</button>
 
   <div *ngIf="csvFileJson && csvFileJson.length">
-    <md-table #table [dataSource]="tableDataSource">
-      <ng-container mdColumnDef="{{ key }}" *ngFor="let key of csvFileKeys">
-        <md-header-cell *mdHeaderCellDef>{{ key }}</md-header-cell>
-        <md-cell *mdCellDef="let element">
-          <md-form-field class="table-form-field">
-            <input mdInput [(ngModel)]="element[key]">
-          </md-form-field>
-        </md-cell>
+    <mat-table #table [dataSource]="tableDataSource">
+      <ng-container matColumnDef="{{ key }}" *ngFor="let key of csvFileKeys">
+        <mat-header-cell *matHeaderCellDef>{{ key }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-form-field class="table-form-field">
+            <input matInput [(ngModel)]="element[key]">
+          </mat-form-field>
+        </mat-cell>
       </ng-container>
 
-      <ng-container mdColumnDef="delete">
-        <md-header-cell *mdHeaderCellDef [ngClass]="'delete-cell'">Löschen</md-header-cell>
-        <md-cell *mdCellDef="let element" [ngClass]="'delete-cell'">
-          <button (click)="deleteRow(element)" md-icon-button><md-icon>remove_circle</md-icon></button>
-        </md-cell>
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef [ngClass]="'delete-cell'">Löschen</mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="'delete-cell'">
+          <button (click)="deleteRow(element)" mat-icon-button><mat-icon>remove_circle</mat-icon></button>
+        </mat-cell>
       </ng-container>
 
-      <md-header-row *mdHeaderRowDef="csvFileKeys"></md-header-row>
-      <md-row *mdRowDef="let row; columns: csvFileKeys.concat(['delete']);"></md-row>
-    </md-table>
-    <button md-raised-button color="accent" style="margin: 10px 0 10px 0" (click)="addRow()">Zeile hinzufügen</button>
+      <mat-header-row *matHeaderRowDef="csvFileKeys"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: csvFileKeys.concat(['delete']);"></mat-row>
+    </mat-table>
+    <button mat-raised-button color="accent" style="margin: 10px 0 10px 0" (click)="addRow()">Zeile hinzufügen</button>
   </div>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button [disabled]="!csvFileJson || csvFileJson.length == 0" (click)="generate()">Generieren</button>
-  <button md-button md-dialog-close>Schließen</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [disabled]="!csvFileJson || csvFileJson.length == 0" (click)="generate()">Generieren</button>
+  <button mat-button mat-dialog-close>Schließen</button>
+</mat-dialog-actions>

@@ -1,22 +1,22 @@
-<md-card id="template-display" *ngIf="templateService.activeTemplate">
+<mat-card id="template-display" *ngIf="templateService.activeTemplate">
 
-  <md-card-title>{{ templateService.activeTemplate?.name }}</md-card-title>
-  <md-card-content>{{ templateService.activeTemplate?.description }}</md-card-content>
+  <mat-card-title>{{ templateService.activeTemplate?.name }}</mat-card-title>
+  <mat-card-content>{{ templateService.activeTemplate?.description }}</mat-card-content>
 
-  <md-card-actions>
-    <button md-raised-button color="accent" (click)="edit()" mdTooltip="Template Editieren">
-      <md-icon>edit</md-icon>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)="edit()" matTooltip="Template Editieren">
+      <mat-icon>edit</mat-icon>
     </button>
-    <button md-raised-button color="accent" (click)="upload()" mdTooltip="LaTeX Dokument hochladen">
-      <md-icon>file_upload</md-icon>
+    <button mat-raised-button color="accent" (click)="upload()" matTooltip="LaTeX Dokument hochladen">
+      <mat-icon>file_upload</mat-icon>
     </button>
     <a [href]="templateLink" [download]="templateService.activeTemplate?.name" *ngIf="templateService.activeTemplate?.document">
-      <button md-raised-button color="accent" mdTooltip="LaTeX Dokument herunterladen">
-        <md-icon>file_download</md-icon>
+      <button mat-raised-button color="accent" matTooltip="LaTeX Dokument herunterladen">
+        <mat-icon>file_download</mat-icon>
       </button>
     </a>
-    <button md-raised-button color="warn" (click)="remove()" mdTooltip="Template Löschen">
-      <md-icon>delete</md-icon>
+    <button mat-raised-button color="warn" (click)="remove()" matTooltip="Template Löschen">
+      <mat-icon>delete</mat-icon>
     </button>
-  </md-card-actions>
-</md-card>
+  </mat-card-actions>
+</mat-card>

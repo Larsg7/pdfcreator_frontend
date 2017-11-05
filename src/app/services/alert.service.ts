@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ErrorDialogComponent } from '../dialogs/error-dialog/error-dialog.component';
-
 @Injectable()
 export class AlertService {
 
-  constructor(private snackBar: MdSnackBar,
-              private dialog: MdDialog) {
+  constructor(private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
   }
 
   showSnack(text: string, code = 1) {

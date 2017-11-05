@@ -1,56 +1,56 @@
-<h2 md-dialog-title>Account</h2>
-<md-dialog-content>
-  <md-expansion-panel>
-    <md-expansion-panel-header>
-      <md-panel-title>
+<h2 mat-dialog-title>Account</h2>
+<mat-dialog-content>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         Nutzername
-      </md-panel-title>
-      <md-panel-description>
+      </mat-panel-title>
+      <mat-panel-description>
         {{ user.pluck('name') | async }}
-      </md-panel-description>
-    </md-expansion-panel-header>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
     <form [formGroup]="userForm" *ngIf="userForm">
-      <md-form-field>
-        <input placeholder="Nutzername" mdInput formControlName="username">
-      </md-form-field>
+      <mat-form-field>
+        <input placeholder="Nutzername" matInput formControlName="username">
+      </mat-form-field>
     </form>
-  </md-expansion-panel>
+  </mat-expansion-panel>
 
-  <md-expansion-panel>
-    <md-expansion-panel-header>
-      <md-panel-title>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         Email
-      </md-panel-title>
-      <md-panel-description>
+      </mat-panel-title>
+      <mat-panel-description>
         {{ user.pluck('email') | async }}
-      </md-panel-description>
-    </md-expansion-panel-header>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
     <form [formGroup]="userForm" *ngIf="userForm">
-      <md-form-field>
-        <input placeholder="Deine E-Mail" mdInput formControlName="email">
-      </md-form-field>
+      <mat-form-field>
+        <input placeholder="Deine E-Mail" matInput formControlName="email">
+      </mat-form-field>
     </form>
-  </md-expansion-panel>
+  </mat-expansion-panel>
 
-  <md-expansion-panel>
-    <md-expansion-panel-header>
-      <md-panel-title>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         Password
-      </md-panel-title>
-    </md-expansion-panel-header>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
     <form [formGroup]="userForm" *ngIf="userForm">
-      <md-form-field>
-        <input placeholder="Neues Password" mdInput type="password" formControlName="password">
-      </md-form-field>
-      <md-form-field>
-        <input placeholder="Password bestätigen" mdInput type="password" formControlName="passwordConfirm">
-      </md-form-field>
+      <mat-form-field>
+        <input placeholder="Neues Password" matInput type="password" formControlName="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input placeholder="Password bestätigen" matInput type="password" formControlName="passwordConfirm">
+      </mat-form-field>
     </form>
-  </md-expansion-panel>
+  </mat-expansion-panel>
 
 
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-raised-button color="primary" (click)="save()" [disabled]="userForm.invalid || userForm.pristine">Speichern</button>
-  <button md-button md-dialog-close>Schließen</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="userForm.invalid || userForm.pristine">Speichern</button>
+  <button mat-button mat-dialog-close>Schließen</button>
+</mat-dialog-actions>

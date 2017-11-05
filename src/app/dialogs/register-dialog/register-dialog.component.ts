@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { UserService } from '../../services/user.service';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-register-dialog',
@@ -14,7 +14,7 @@ export class RegisterDialogComponent implements OnInit {
   newUserForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              public dialogRef: MdDialogRef<RegisterDialogComponent>,
+              public dialogRef: MatDialogRef<RegisterDialogComponent>,
               private api: ApiService,
               private userService: UserService) {
     this.createForm();
