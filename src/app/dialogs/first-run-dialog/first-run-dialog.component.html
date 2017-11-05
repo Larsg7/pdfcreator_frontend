@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Willkommen im {{config.APP_NAME}}</h2>
+<mat-dialog-content style="overflow: hidden">
+  <div>
+    <mat-slide-toggle [(ngModel)]="doNotShowAgain">Zeige diesen Dialog nicht mehr</mat-slide-toggle>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Schließen</button>
+</mat-dialog-actions>

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import {
-  MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule,
+  MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatSidenavModule, MatSliderModule, MatSnackBarModule, MatTableModule,
+  MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatTableModule,
   MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 
@@ -30,6 +31,7 @@ import {
     MatTableModule,
     MatGridListModule,
     MatSliderModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatButtonModule,
@@ -50,6 +52,7 @@ import {
     MatTableModule,
     MatGridListModule,
     MatSliderModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule {

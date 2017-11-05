@@ -9,6 +9,11 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
+import { CONFIG } from '../../config';
+import { AlertService } from './alert.service';
+import { FirstRunDialogComponent } from '../dialogs/first-run-dialog/first-run-dialog.component';
+import { UpdatesDialogComponent } from '../dialogs/updates-dialog/updates-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -18,8 +23,14 @@ export class UserService {
 
   constructor(private api: ApiService,
               private auth: AuthService,
-              private templateService: TemplateService) {
-    if (this.auth.token) {
+              private templateService: TemplateService,
+              private alert: AlertService,
+              private nav: Router) {
+    this.setup();
+  }
+
+  public setup() {
+    if (this.auth.isUserLoggedIn()) {
       this.getActiveUser();
     }
   }

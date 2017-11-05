@@ -15,6 +15,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { PasswordForgotDialogComponent } from './password-forgot-dialog/password-forgot-dialog.component';
 import { TemplateSeriesDialogComponent } from './template-series-dialog/template-series-dialog.component';
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
+import { FirstRunDialogComponent } from './first-run-dialog/first-run-dialog.component';
+import { UpdatesDialogComponent } from './updates-dialog/updates-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.compo
     PasswordForgotDialogComponent,
     TemplateSeriesDialogComponent,
     FeedbackDialogComponent,
+    FirstRunDialogComponent,
+    UpdatesDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent,
@@ -42,6 +46,8 @@ import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.compo
     PasswordForgotDialogComponent,
     TemplateSeriesDialogComponent,
     FeedbackDialogComponent,
+    FirstRunDialogComponent,
+    UpdatesDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +69,8 @@ import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.compo
     PasswordForgotDialogComponent,
     TemplateSeriesDialogComponent,
     FeedbackDialogComponent,
+    FirstRunDialogComponent,
+    UpdatesDialogComponent,
   ]
 })
 export class DialogModule { }

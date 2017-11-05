@@ -1,11 +1,11 @@
 <div id="template-display">
   <app-template-basics></app-template-basics>
   <div *ngIf="templateService.activeTemplate">
-    <div id="template-view" *ngIf="templateService.activeTemplate?.document || templateService.activeTemplate?.fields?.length; else noDocument">
-      <div class="template-view-item" *ngIf="templateService.activeTemplate?.fields.length">
+    <div id="template-view" class="row" *ngIf="templateService.activeTemplate?.document || templateService.activeTemplate?.fields?.length; else noDocument">
+      <div class="template-view-item col-sm-12 col-md-5 col-lg-4" *ngIf="templateService.activeTemplate?.fields.length">
         <app-template-placeholders></app-template-placeholders>
       </div>
-      <div class="template-view-item">
+      <div class="template-view-item col-sm-12 col-md-7 col-lg-8">
         <object *ngIf="safeUri" [data]="safeUri" id="template-document"></object>
       </div>
     </div>

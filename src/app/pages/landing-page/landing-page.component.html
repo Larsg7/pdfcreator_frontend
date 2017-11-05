@@ -8,9 +8,16 @@
     </div>
   </div>
   <div class="section" id="description-section">
-      <h2>Beschreibung</h2>
-      <p>Mit dem {{config.APP_NAME}} können Templates mit LaTeX erstellt und online ausgefüllt werden.</p>
-      <img src="../../../assets/App-Showcase1.png" alt="Showcase" id="app-showcase-pic">
+    <p>Mit dem {{config.APP_NAME}} können mit LaTeX erstellte Templates ganz einfach online ausgefüllt werden.</p>
+    <img src="../../../assets/App-Showcase1.png" alt="Showcase" id="app-showcase-pic">
+    <p style="padding-top: 20px">Erstelle ein LaTeX Dokument mit deinem Lieblings-LaTeX-Editor.</p>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    <p>Lade es in den {{config.APP_NAME}} hoch.</p>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    <p>Schon kannst du die im Dokument vorhanden Platzhalter und Variablen mit Inhalt füllen und das Ergebnis herunterladen.</p>
+    <button mat-raised-button color="accent" class="call-to-action-btn" style="margin-top: 20px" (click)="go()">Los
+      geht's
+    </button>
   </div>
   <div class="divider"></div>
   <div class="row section" id="features-section">
@@ -25,10 +32,13 @@
         <a [href]="feature.link" *ngIf="feature.link">Weitere Informationen</a>
       </mat-card>
     </div>
-    <button mat-raised-button color="accent" class="call-to-action-btn" style="margin-top: 20px" (click)="go()">Los geht's</button>
+    <button mat-raised-button color="accent" class="call-to-action-btn" style="margin-top: 20px" (click)="go()">Los
+      geht's
+    </button>
   </div>
   <div class="divider"></div>
   <div class="section" id="footer">
-    Entwickelt von <a [href]="config.AUTHOR_URL" class="link-no-decoration">Lars Gröber</a> für den Starken Start ins Studium.
+    Entwickelt von <a [href]="config.AUTHOR_URL" class="link-no-decoration">Lars Gröber</a> für den Starken Start ins
+    Studium.
   </div>
 </div>
