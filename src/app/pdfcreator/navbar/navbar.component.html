@@ -25,7 +25,8 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #accMenu="matMenu">
-      <button mat-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }}</button>
+      <span mat-menu-item disabled>{{ (userService.user | async)?.name }}</span>
+      <button mat-menu-item (click)="showAccountDialog()"> Account</button>
       <button mat-menu-item (click)="logout()"> Ausloggen</button>
     </mat-menu>
     <mat-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></mat-progress-bar>

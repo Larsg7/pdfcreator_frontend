@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Registrierung</h2>
 <mat-dialog-content>
+  <p>Fülle bitte die folgenden Felder aus:</p>
   <form [formGroup]="newUserForm">
     <mat-form-field>
       <input matInput placeholder="Nutzername" formControlName="username">
@@ -21,5 +22,6 @@
   <p><strong>Achtung! Es gibt aktuell keine Möglichkeit, das Passwort zurückzusetzen.</strong></p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="register()" [disabled]="!newUserForm.valid">Einloggen</button>
+  <button mat-raised-button color="primary" (click)="register()" type="submit" [disabled]="!newUserForm.valid">Registrieren</button>
+  <button mat-button mat-dialog-close>Schließen</button>
 </mat-dialog-actions>

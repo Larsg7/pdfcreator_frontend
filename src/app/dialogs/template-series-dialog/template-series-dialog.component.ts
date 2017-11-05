@@ -17,7 +17,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
 
   csvFile: File;
   private csvFileKeys: string[];
-  private csvFileJson: JSON[];
+  public csvFileJson: JSON[];
 
   public fileOk = false;
   public tableDataSubject: ReplaySubject<JSON[]> = new ReplaySubject(1);

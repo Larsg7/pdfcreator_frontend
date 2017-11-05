@@ -216,8 +216,8 @@ export class ApiService {
             loadingSub.next();
           },
           err => {
-            loadingSub.next();
             observer.error(err);
+            loadingSub.next();
           },
           () => {
             observer.complete();

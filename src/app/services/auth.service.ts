@@ -16,7 +16,7 @@ export class AuthService implements OnInit {
   }
 
   get token(): string {
-    return this._token;
+    return this._token && this._token !== 'undefined' ? this._token : '';
   }
 
   set token(value: string) {
