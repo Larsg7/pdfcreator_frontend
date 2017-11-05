@@ -1,0 +1,21 @@
+<div id="landing-page-container">
+  <div id="header">
+    <div id="title">
+      <h2>{{ config.APP_NAME }}</h2>
+      <p>Erstelle dynamische LaTeX-Templates für Zertifikate, Verträge etc.</p>
+      <button mat-raised-button color="primary">Los geht's</button>
+    </div>
+  </div>
+  <div class="row" id="features">
+    <div class="col-sm-4" *ngFor="let feature of features">
+      <mat-card class="feature-item">
+        <mat-icon>{{ feature.icon }}</mat-icon>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </mat-card>
+    </div>
+  </div>
+  <div id="footer">
+
+  </div>
+</div>

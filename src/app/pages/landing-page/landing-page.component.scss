@@ -1,0 +1,30 @@
+#landing-page-container {
+  padding: 50px;
+
+  #header {
+    height: 30vh;
+    position: relative;
+
+    #title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  }
+
+  #features {
+    padding-top: 50px;
+    height: 30vh;
+
+    .feature-item {
+      mat-icon {
+        font-size: 50px;
+        display: block;
+        margin: auto;
+      }
+      
+    }
+  }
+}
