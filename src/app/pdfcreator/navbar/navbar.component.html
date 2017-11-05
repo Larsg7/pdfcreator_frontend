@@ -1,11 +1,15 @@
-<md-sidenav-container style="height: 100%" id="sidenav-container">
+<md-sidenav-container style="height: 100%">
   <md-sidenav #sidenav id="sidenav">
-    <md-list>
-        <md-list-item>
-          <md-icon mdListIcon>help_outline</md-icon>
-          <h3 mdLine>Hilfe</h3>
-        </md-list-item>
-    </md-list>
+    <md-nav-list>
+      <a [routerLink]="['/app/help']" mat-list-item (click)="sidenav.close()">
+        <md-icon mdListIcon>help_outline</md-icon>
+        <h3 mdLine>Hilfe</h3>
+      </a>
+      <a [routerLink]="['/app/about']" mat-list-item (click)="sidenav.close()">
+        <md-icon mdListIcon>info_outline</md-icon>
+        <h3 mdLine>Impressum</h3>
+      </a>
+    </md-nav-list>
   </md-sidenav>
 
   <md-toolbar id="navbar" color="primary" class="box-shadow-1">
@@ -21,8 +25,8 @@
       <md-icon>account_circle</md-icon>
     </button>
     <md-menu #accMenu="mdMenu">
-        <button md-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }} </button>
-        <button md-menu-item (click)="logout()"> Ausloggen </button>
+      <button md-menu-item (click)="showAccountDialog()"> {{ (userService.user | async)?.name }}</button>
+      <button md-menu-item (click)="logout()"> Ausloggen</button>
     </md-menu>
     <md-progress-bar mode="indeterminate" id="loading-bar" *ngIf="loadingService.isLoading | async"></md-progress-bar>
   </md-toolbar>

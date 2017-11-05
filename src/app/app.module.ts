@@ -11,6 +11,7 @@ import { DialogModule } from './dialogs/dialog.module';
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PdfcreatorModule } from './pdfcreator/pdfcreator.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PdfcreatorModule } from './pdfcreator/pdfcreator.module';
     DialogModule,
     FormsModule,
     PdfcreatorModule,
+    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

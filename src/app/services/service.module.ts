@@ -8,6 +8,7 @@ import { ThemeService } from './theme.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingService } from './loading.service';
 import { TableDecoderService } from './table-decoder.service';
+import { FeedbackService } from './feedback.service';
 
 @NgModule({
   providers: [
@@ -19,6 +20,7 @@ import { TableDecoderService } from './table-decoder.service';
     ThemeService,
     LoadingService,
     TableDecoderService,
+    FeedbackService,
   ],
   imports: [
     HttpClientModule,
