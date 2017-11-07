@@ -10,7 +10,7 @@
     <button mat-raised-button color="accent" (click)="upload()" matTooltip="LaTeX Dokument hochladen">
       <mat-icon>file_upload</mat-icon>
     </button>
-    <a [href]="templateLink" [download]="templateService.activeTemplate?.name" *ngIf="templateService.activeTemplate?.document">
+    <a [href]="templateLink" [download]="templateService.activeTemplate?.name" *ngIf="templateService.activeTemplate?.token">
       <button mat-raised-button color="accent" matTooltip="LaTeX Dokument herunterladen">
         <mat-icon>file_download</mat-icon>
       </button>

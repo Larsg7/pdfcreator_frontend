@@ -122,10 +122,7 @@ export class ApiService {
   getTemplateDetailsV1(id: number, fields: TemplateField[][] = []): Observable<Template> {
     const apiFields = fields ? fields.map(f => f.map(_ => _.toApi())) : [];
     // FIXME
-    const fieldsJson = JSON.stringify(apiFields).replace(/"/g, '\\"')
-      .replace(/content/g, 'Content')
-      .replace(/replacement/g, 'Replacement')
-      .replace(/comment/g, 'Comment');
+    const fieldsEncoded = btoa(JSON.stringify(apiFields));
 
     const request = this.makeGraphQlQuery(`
     query {
@@ -134,7 +131,7 @@ export class ApiService {
           id
           name
           description
-          document(fields: "${fieldsJson}")
+          document(fields: "${fieldsEncoded}")
           fields
           token
         }

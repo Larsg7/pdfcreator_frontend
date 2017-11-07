@@ -1,6 +1,48 @@
 <h2 mat-dialog-title>Willkommen im {{config.APP_NAME}}</h2>
 <mat-dialog-content style="overflow: hidden">
-  <div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Erste Schritte
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>Erstelle ein Template mit dem + Button in der rechten unteren Ecke.</mat-list-item>
+      <mat-list-item>
+        <a target="_blank" href="https://github.com/Larsg7/pdfcreator_frontend/wiki/Template-Syntax">
+          Lese dich in die Nutzung der Template Syntax ein.
+        </a>
+      </mat-list-item>
+      <mat-list-item>Lade ein LaTeX-Dokument hoch.</mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Hilfe/Anleitung
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        <a target="_blank" href="https://github.com/Larsg7/pdfcreator_frontend/wiki">Wiki</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a target="_blank" href="/app/help">Anleitung und FAQ</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Kontakt
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <mat-list-item>
+        Bei Fragen und/oder Feedback, nutze das Feedback System über die Schaltfläche in der linken unteren Ecke oder
+        <a href="mailto:lars@elearning.physik.uni-frankfurt.de">schreibe</a> mir.
+      </mat-list-item>
+  </mat-expansion-panel>
+  <div class="mt-1">
     <mat-slide-toggle [(ngModel)]="doNotShowAgain">Zeige diesen Dialog nicht mehr</mat-slide-toggle>
   </div>
 </mat-dialog-content>

@@ -1,6 +1,10 @@
 <mat-sidenav-container style="height: 100%">
   <mat-sidenav #sidenav id="sidenav">
     <mat-nav-list>
+      <a [routerLink]="['/app']" mat-list-item (click)="sidenav.close()">
+        <mat-icon matListIcon>home</mat-icon>
+        <h3 matLine>Hauptseite</h3>
+      </a>
       <a [routerLink]="['/app/help']" mat-list-item (click)="sidenav.close()">
         <mat-icon matListIcon>help_outline</mat-icon>
         <h3 matLine>Hilfe und Anleitung</h3>
