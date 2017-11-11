@@ -16,12 +16,14 @@ import { MatDialogRef } from '@angular/material';
 export class TemplateSeriesDialogComponent implements OnInit {
 
   csvFile: File;
-  private csvFileKeys: string[];
+  private csvFileKeys: string[] = [];
   public csvFileJson: JSON[];
 
   public fileOk = false;
   public tableDataSubject: ReplaySubject<JSON[]> = new ReplaySubject(1);
   public tableDataSource = new TemplateDataSource(this.tableDataSubject);
+
+  public globalTemplateFields: TemplateField[] = [];
 
   @ViewChild('fileUpload') fileInput: ElementRef;
 
@@ -43,11 +45,12 @@ export class TemplateSeriesDialogComponent implements OnInit {
       this.csvFileKeys.forEach(key => {
         templateField.push(new TemplateField(key, '', page[key]));
       });
-      templateFields.push(templateField);
+      templateFields.push(templateField.concat(this.globalTemplateFields));
     });
+    console.log(templateFields)
     this.templateService.activeTemplate.fields = templateFields;
     this.templateService.reloadTemplate();
-    this.dialogRef.close();
+    this.closeDialog();
   }
 
   onCSVFileChange(event) {
@@ -67,7 +70,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
     reader.onload = (e) => {
       try {
         this.csvFileKeys = TableDecoderService.getKeys(reader.result);
-        this.csvFileJson = TableDecoderService.csvToJson(reader.result, this.templateService.activeTemplate.fields[0].map(_ => _.content));
+        this.csvFileJson = TableDecoderService.csvToJson(reader.result);
         this.tableDataSubject.next(this.csvFileJson);
         console.log(this.csvFileKeys, this.csvFileJson);
         this.fileOk = true;
@@ -86,6 +89,10 @@ export class TemplateSeriesDialogComponent implements OnInit {
     return header + '\n' + row + '\n' + row;
   }
 
+  getTemplateKeys() {
+    return this.templateService.activeTemplate.fields[0].map(_ => _.content);
+  }
+
   addRow() {
     this.csvFileJson.push(JSON.parse('{}'));
     this.tableDataSubject.next(this.csvFileJson);
@@ -100,9 +107,20 @@ export class TemplateSeriesDialogComponent implements OnInit {
   }
 
   createTable() {
-    this.csvFileKeys = this.templateService.activeTemplate.fields[0].map(_ => _.content);
+    this.csvFileKeys = this.templateService.activeTemplate.fields[0]
+      .filter(_ => !this.globalTemplateFields.find(__ => __.content === _.content))
+      .map(_ => _.content);
     this.csvFileJson = [];
     this.addRow();
+  }
+
+  closeDialog() {
+    localStorage.setItem('csvFileJson', JSON.stringify(this.csvFileJson || ''));
+    this.dialogRef.close();
+  }
+
+  globalFieldsChanged(event) {
+    this.globalTemplateFields = event.value.map(_ => new TemplateField(_, '', ''));
   }
 }
 

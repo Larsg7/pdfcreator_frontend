@@ -1,18 +1,41 @@
 <h2 mat-dialog-title>Was ist neu im {{config.APP_NAME}} Version {{config.VERSION}}</h2>
 <mat-dialog-content style="overflow: hidden">
+
   Neu:
   <ul>
-    <li>LaTeX Dokumente werden nun als zip Datei hochgeladen.</li>
-    <li>Alle Templates sind Teil eines Nutzeraccounts.</li>
-    <li>Bei dem Erstellen einer Serie werden die Werte als editierbare Tabelle angezeigt.</li>
-    <li>Es können Kommentare zu Platzhaltern und Variablen geschrieben werden: << Name ; Kommentar >>.</li>
+    <li>Ungenutzte Template Felder werden mit <strong>\verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
+      darf daher nicht in der Definition von Template Feldern genutzt werden.</li>
+    <li>Beim Ausfüllen einer Serie an Templates können globale Platzhalter/Variablen angelegt werden.</li>
+  </ul>
+  Fixes:
+  <ul>
+    <li>Anführungszeichen und manche Sonderzeichen führen in Platzhaltern und Variablen zu keinen Problemen mehr.</li>
   </ul>
   Bekannte Probleme:
   <ul>
-    <li>Anführungszeichen und manche Sonderzeichen können in Platzhaltern und Variablen zu Problemen führen.</li>
     <li>Das Versenden von E-Mails ist noch nicht implementiert => Zurücksetzen von Passwörtern funktioniert nicht.</li>
   </ul>
-  <div>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Version 0.6.0
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Neu:
+    <ul>
+      <li>LaTeX Dokumente werden nun als zip Datei hochgeladen.</li>
+      <li>Alle Templates sind Teil eines Nutzeraccounts.</li>
+      <li>Bei dem Erstellen einer Serie werden die Werte als editierbare Tabelle angezeigt.</li>
+      <li>Es können Kommentare zu Platzhaltern und Variablen geschrieben werden: << Name ; Kommentar >>.</li>
+    </ul>
+    Bekannte Probleme:
+    <ul>
+      <li>Anführungszeichen und manche Sonderzeichen können in Platzhaltern und Variablen zu Problemen führen.</li>
+      <li>Das Versenden von E-Mails ist noch nicht implementiert => Zurücksetzen von Passwörtern funktioniert nicht.</li>
+    </ul>
+  </mat-expansion-panel>
+  <div class="mt-1">
     <mat-slide-toggle [(ngModel)]="doNotShowAgain">Zeige diesen Dialog nicht mehr</mat-slide-toggle>
   </div>
 </mat-dialog-content>

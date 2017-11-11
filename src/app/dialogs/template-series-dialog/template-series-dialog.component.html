@@ -1,19 +1,51 @@
 <h2 mat-dialog-title>Eine Serie von Templates erstellen</h2>
 <mat-dialog-content>
-  <p>Bitte beachte die folgenden Punkte:</p>
-  <ul>
-    <li>Du kannst eine <strong>CSV</strong> Datei hochladen, wobei die Namen der Spalten alle Platzhalter/Variablen im Template abdecken müssen.</li>
-    <li>Eine solche Datei kann z.B. mit Excel oder LibreOffice erstellt werden.</li>
-    <li>Die Werte einer Zeile müssen durch ein Kommar getrennt werden.</li>
-    <li>Einzelne Werte müssen mit <strong>"</strong> eingegrenzt sein.</li>
-  </ul>
-  <p>Hier ist ein Beispiel:</p>
-  <pre style="margin-left: 20px">
+  <mat-expansion-panel #firstPanel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Hinweise zur Datei
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>Bitte beachte die folgenden Punkte:</p>
+    <ul>
+      <li>Du kannst eine <strong>CSV</strong> Datei hochladen. Eine solche Datei kann z.B. mit Excel oder LibreOffice
+        erstellt werden.
+      </li>
+      <li>Die Werte einer Zeile müssen durch ein Kommar getrennt werden und einzelne Werte müssen mit <strong>"</strong>
+        eingegrenzt sein..
+      </li>
+      <li>Wenn du globale Ersetzungen auswählst, werden Werte in der Tabelle überschrieben.</li>
+    </ul>
+    <p>Hier ist ein Beispiel:</p>
+    <pre style="margin-left: 20px">
 {{ exampleCsv() }}
   </pre>
-  <input type="file" (change)="onCSVFileChange($event)" #fileUpload hidden>
-  <button mat-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
-  <button mat-raised-button (click)="createTable()" color="accent">Tabelle manuell erzeugen</button>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Globale Ersetzungen
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Falls du Felder global festlegen willst, wähle sie hier aus:
+    <mat-form-field>
+      <mat-select placeholder="Globale Ersetzungen" multiple (change)="globalFieldsChanged($event)">
+        <mat-option *ngFor="let key of getTemplateKeys()" [value]="key">{{ key }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngFor="let field of globalTemplateFields">
+      <input matInput [placeholder]="field.content" [(ngModel)]="field.replacement">
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <div class="mt-1">
+    <input type="file" (change)="onCSVFileChange($event)" #fileUpload hidden>
+    <button mat-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
+    <button mat-raised-button (click)="createTable()" color="accent">
+      {{ !csvFileKeys.length ? 'Tabelle manuell erzeugen' : 'Tabelle zurücksetzen' }}
+    </button>
+  </div>
 
   <div *ngIf="csvFileJson && csvFileJson.length">
     <mat-table #table [dataSource]="tableDataSource">
@@ -29,7 +61,9 @@
       <ng-container matColumnDef="delete">
         <mat-header-cell *matHeaderCellDef [ngClass]="'delete-cell'">Löschen</mat-header-cell>
         <mat-cell *matCellDef="let element" [ngClass]="'delete-cell'">
-          <button (click)="deleteRow(element)" mat-icon-button><mat-icon>remove_circle</mat-icon></button>
+          <button (click)="deleteRow(element)" mat-icon-button>
+            <mat-icon>remove_circle</mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 
@@ -41,5 +75,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button [disabled]="!csvFileJson || csvFileJson.length == 0" (click)="generate()">Generieren</button>
-  <button mat-button mat-dialog-close>Schließen</button>
+  <button mat-button (click)="closeDialog()">Schließen</button>
 </mat-dialog-actions>
