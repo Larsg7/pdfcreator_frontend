@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { matchOtherValidator } from '../register-dialog/register-dialog.component';
-import { HttpClient } from '@angular/common/http';
 import { CONFIG } from '../../../config';
 import { AlertService } from '../../services/alert.service';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-password-forgot-dialog',
@@ -22,7 +22,7 @@ export class PasswordForgotDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<PasswordForgotDialogComponent>,
               private formBuilder: FormBuilder,
-              private http: HttpClient,
+              private http: Http,
               private alert: AlertService) {
     this.createForms();
   }
@@ -57,9 +57,13 @@ export class PasswordForgotDialogComponent implements OnInit {
     if (this.newPasswordForm.invalid) {
       return;
     }
+    const name = this.authForm.get('username').value;
+    const email = this.authForm.get('email').value;
     const token = this.newPasswordForm.get('token').value;
     const password = this.newPasswordForm.get('password').value;
     this.http.post(this.resetUrl, {
+      Name: name,
+      Email: email,
       Token: token,
       NewPassword: password,
     }).subscribe(() => {

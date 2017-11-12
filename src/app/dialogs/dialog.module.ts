@@ -18,6 +18,7 @@ import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.compo
 import { FirstRunDialogComponent } from './first-run-dialog/first-run-dialog.component';
 import { UpdatesDialogComponent } from './updates-dialog/updates-dialog.component';
 import { NgxCarouselModule } from 'ngx-carousel';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NgxCarouselModule } from 'ngx-carousel';
     ReactiveFormsModule,
     FileUploadModule,
     NgxCarouselModule,
+    HttpModule,
   ],
   exports: [
     LoginDialogComponent,
