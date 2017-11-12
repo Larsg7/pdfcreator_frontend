@@ -23,9 +23,7 @@ export class UserService {
 
   constructor(private api: ApiService,
               private auth: AuthService,
-              private templateService: TemplateService,
-              private alert: AlertService,
-              private nav: Router) {
+              private templateService: TemplateService) {
     this.setup();
   }
 

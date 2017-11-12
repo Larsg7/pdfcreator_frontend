@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../module/material.module';
 import { ServiceModule } from '../services/service.module';
 import { RouterModule } from '@angular/router';
-import { PDFCreatorRoutes } from './pdfcreator.routing';
+import { PDFCreatorRouter } from './pdfcreator.routing';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { TemplateBasicsComponent } from './template-basics/template-basics.component';
 import { TemplatePlaceholdersComponent } from './template-placeholders/template-placeholders.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { HelpPageComponent } from './help-page/help-page.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,14 @@ import { TemplatePlaceholdersComponent } from './template-placeholders/template-
     TemplatePickerComponent,
     TemplateBasicsComponent,
     TemplatePlaceholdersComponent,
+    AboutPageComponent,
+    HelpPageComponent,
     NavbarComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ServiceModule,
-    RouterModule.forChild(PDFCreatorRoutes),
+    PDFCreatorRouter,
     FormsModule,
   ],
   exports: [

@@ -43,7 +43,7 @@
     <input type="file" (change)="onCSVFileChange($event)" #fileUpload hidden>
     <button mat-raised-button (click)="chooseFile()" color="primary">Datei hochladen</button>
     <button mat-raised-button (click)="createTable()" color="accent">
-      {{ !csvFileKeys.length ? 'Tabelle manuell erzeugen' : 'Tabelle zurücksetzen' }}
+      {{ !csvFileJson || csvFileJson.length == 0 ? 'Tabelle manuell erzeugen' : 'Tabelle zurücksetzen' }}
     </button>
   </div>
 

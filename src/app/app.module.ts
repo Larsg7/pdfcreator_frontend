@@ -26,8 +26,6 @@ import { PagesModule } from './pages/pages.module';
     ServiceModule,
     DialogModule,
     FormsModule,
-    PdfcreatorModule,
-    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

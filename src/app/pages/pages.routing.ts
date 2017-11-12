@@ -1,6 +1,8 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
-export const PagesRoutes: Routes = [
-  { path: 'landing', component: LandingPageComponent },
+const PagesRoutes: Routes = [
+  { path: '', component: LandingPageComponent },
 ];
+
+export const PagesRouter = RouterModule.forChild(PagesRoutes);

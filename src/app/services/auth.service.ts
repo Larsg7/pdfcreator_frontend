@@ -8,7 +8,7 @@ export class AuthService implements OnInit {
   private _token: string;
   public userId: number;
 
-  constructor(private alert: AlertService) {
+  constructor() {
     this._token = localStorage.getItem('token');
   }
 
