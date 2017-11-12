@@ -17,6 +17,7 @@ import { TemplateSeriesDialogComponent } from './template-series-dialog/template
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
 import { FirstRunDialogComponent } from './first-run-dialog/first-run-dialog.component';
 import { UpdatesDialogComponent } from './updates-dialog/updates-dialog.component';
+import { NgxCarouselModule } from 'ngx-carousel';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UpdatesDialogComponent } from './updates-dialog/updates-dialog.componen
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
+    NgxCarouselModule,
   ],
   exports: [
     LoginDialogComponent,

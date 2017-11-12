@@ -120,9 +120,16 @@ export class ApiService {
   }
 
   getTemplateDetailsV1(id: number, fields: TemplateField[][] = []): Observable<Template> {
+    // source: https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
+    function b64EncodeUnicode(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+          return String.fromCharCode(+('0x' + p1));
+        }));
+    }
+
     const apiFields = fields ? fields.map(f => f.map(_ => _.toApi())) : [];
-    // FIXME
-    const fieldsEncoded = btoa(JSON.stringify(apiFields));
+    const fieldsEncoded = b64EncodeUnicode(JSON.stringify(apiFields));
 
     const request = this.makeGraphQlQuery(`
     query {

@@ -1,0 +1,53 @@
+.leftRs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.rightRs {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.image {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 100%;
+  width: 800px;
+  img {
+    width: 100%;
+  }
+
+  .image-marker {
+    position: absolute;
+    border: 2px solid red;
+  }
+
+  .marker-circle {
+    $size: 40px;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+  }
+
+  #marker-1-1 {
+    bottom: 0;
+    right: 0;
+  }
+
+  #marker-2-1 {
+    top: 25%;
+    left: 5.9%;
+    width: 44px;
+    height: 21px;
+  }
+
+}
+
+.image-text {
+  font-size: large;
+  text-align: center;
+  margin-bottom: 0;
+}

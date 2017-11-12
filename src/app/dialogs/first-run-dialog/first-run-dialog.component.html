@@ -1,47 +1,77 @@
 <h2 mat-dialog-title>Willkommen im {{config.APP_NAME}}</h2>
-<mat-dialog-content style="overflow: hidden">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Erste Schritte
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <mat-list-item>Erstelle ein Template mit dem + Button in der rechten unteren Ecke.</mat-list-item>
-      <mat-list-item>
-        <a target="_blank" href="https://github.com/Larsg7/pdfcreator_frontend/wiki/Template-Syntax">
-          Lese dich in die Nutzung der Template Syntax ein.
-        </a>
-      </mat-list-item>
-      <mat-list-item>Lade ein LaTeX-Dokument hoch.</mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Hilfe/Anleitung
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <mat-list-item>
-        <a target="_blank" href="https://github.com/Larsg7/pdfcreator_frontend/wiki">Wiki</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a target="_blank" href="/app/help">Anleitung und FAQ</a>
-      </mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Kontakt
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-      <mat-list-item>
-        Bei Fragen und/oder Feedback, nutze das Feedback System über die Schaltfläche in der linken unteren Ecke oder
-        <a href="mailto:lars@elearning.physik.uni-frankfurt.de">schreibe</a> mir.
-      </mat-list-item>
-  </mat-expansion-panel>
+<mat-dialog-content style="overflow: auto">
+  <ngx-carousel
+    [inputs]="carousel"
+    (onMove)="onEnd($event)">
+    <ngx-item NgxCarouselItem>
+      <div>
+        <img src="../../assets/help-images/Full-example.png" class="image">
+        <p class="image-text">
+          Im {{config.APP_NAME}} kannst du Template in LaTeX anlegen und online ausfüllen.
+        </p>
+      </div>
+    </ngx-item>
+    <ngx-item NgxCarouselItem>
+      <div>
+        <div class="image">
+          <img src="../../assets/help-images/empty-example.png">
+          <div class="image-marker marker-circle" id="marker-1-1"></div>
+        </div>
+        <p class="image-text">
+          Beginne, indem du ein neues Template erstellst.
+        </p>
+      </div>
+    </ngx-item>
+    <ngx-item NgxCarouselItem>
+      <div>
+        <div class="image">
+          <img src="../../assets/help-images/new-template-example.png">
+          <div class="image-marker" id="marker-2-1"></div>
+        </div>
+        <p class="image-text">
+          Jedes Template benötigt ein LaTeX-Dokument als Zip-Datei. Du kannst es hier hochladen.
+        </p>
+      </div>
+    </ngx-item>
+    <ngx-item NgxCarouselItem>
+      <div>
+        <div class="image">
+          <img src="../../assets/help-images/upload-example.png">
+        </div>
+        <p class="image-text">
+          Dabei ist es wichtig, dass das Dokument eine <strong>main.tex</strong> hat und alle Template-Felder sich nur
+          in dieser befinden.
+        </p>
+      </div>
+    </ngx-item>
+    <ngx-item NgxCarouselItem>
+      <div>
+        <div class="image">
+          <img src="../../assets/help-images/placeholder-example.png">
+        </div>
+        <p class="image-text">
+          Wenn sich in deinem Dokument Template-Felder befinden kannst du sie hier ausfüllen oder...
+        </p>
+      </div>
+    </ngx-item>
+    <ngx-item NgxCarouselItem>
+      <div>
+        <div class="image">
+          <img src="../../assets/help-images/series-example.png">
+        </div>
+        <p class="image-text">
+          ...eine Serie von Templates erstellen.
+        </p>
+      </div>
+    </ngx-item>
+    <button mat-raised-button color="accent" NgxCarouselPrev class='leftRs'><mat-icon>arrow_left</mat-icon></button>
+    <button mat-raised-button color="primary" NgxCarouselNext class='rightRs'><mat-icon>arrow_right</mat-icon></button>
+  </ngx-carousel>
+  <div style="text-align: center" class="mt-1">
+    <strong>Hier sind weiterführende Links:</strong><br>
+    <a target="_blank" href="https://github.com/Larsg7/pdfcreator/wiki">Wiki</a><br>
+    <a target="_blank" href="https://github.com/Larsg7/pdfcreator/wiki/Template-Syntax">Dokumentation der Template-Syntax</a>
+  </div>
   <div class="mt-1">
     <mat-slide-toggle [(ngModel)]="doNotShowAgain">Zeige diesen Dialog nicht mehr</mat-slide-toggle>
   </div>
