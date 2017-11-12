@@ -1,3 +1,24 @@
-<p>
-  feedback-dialog works!
-</p>
+<h2 mat-dialog-title>Feedback</h2>
+<mat-dialog-content style="max-width: 600px">
+  <form [formGroup]="formGroup">
+    <mat-form-field>
+      <input matInput placeholder="Dein Name (optional)" name="name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [formControl]="typeCtrl" placeholder="Typ deines Feedbacks">
+        <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+      </mat-select>
+      <mat-error>Bitte wähle einen Typ aus.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Dein Feedback" name="feedback"
+                formControlName="feedback" rows="5"></textarea>
+      <mat-error>Bitte gebe ein Feedback an.</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="send()" [disabled]="formGroup.invalid">Absenden</button>
+  <button mat-button mat-dialog-close>Schließen</button>
+</mat-dialog-actions>
+

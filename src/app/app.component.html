@@ -1,4 +1,8 @@
 <span [class.app-dark]="theme.isDarkTheme">
   <router-outlet></router-outlet>
 </span>
-
+<div id="feedback-btn">
+  <button mat-icon-button (click)="openFeedbackDialog()">
+    <mat-icon>feedback</mat-icon>
+  </button>
+</div>

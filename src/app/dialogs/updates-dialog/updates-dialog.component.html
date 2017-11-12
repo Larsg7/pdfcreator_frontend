@@ -3,10 +3,11 @@
 
   Neu:
   <ul>
-    <li>Ungenutzte Template Felder werden mit <strong>\verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
+    <li>Ungenutzte Template Felder werden mit <strong>\Verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
       darf daher nicht in der Definition von Template Feldern genutzt werden.</li>
     <li>Beim Ausfüllen einer Serie an Templates können globale Platzhalter/Variablen angelegt werden.</li>
     <li>Passwörter können zurückgesetzt werden.</li>
+    <li>Ein Feedbacksystem wurde implementiert.</li>
   </ul>
   Fixes:
   <ul>
@@ -14,6 +15,8 @@
   </ul>
   Bekannte Probleme:
   <ul>
+    <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund
+    der Nutzung von '\Verb' in "Math-Mode" wirft.</li>
   </ul>
 
   <mat-expansion-panel>

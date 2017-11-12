@@ -5,6 +5,8 @@ import { matchOtherValidator } from '../register-dialog/register-dialog.componen
 import { CONFIG } from '../../../config';
 import { AlertService } from '../../services/alert.service';
 import { Http } from '@angular/http';
+import * as Raven from 'raven-js';
+
 
 @Component({
   selector: 'app-password-forgot-dialog',
@@ -50,7 +52,7 @@ export class PasswordForgotDialogComponent implements OnInit {
       Email: email,
     }).subscribe(() => {
       this.authenticated = true;
-    }, error => this.alert.showError(error));
+    }, this.handleError);
   }
 
   resetPassword() {
@@ -69,7 +71,12 @@ export class PasswordForgotDialogComponent implements OnInit {
     }).subscribe(() => {
       this.alert.showSnack('Passwort wurde zurückgesetzt. Bitte neu anmelden.');
       this.dialogRef.close();
-    }, error => this.alert.showError(error));
+    }, this.handleError);
+  }
+
+  private handleError(error) {
+    Raven.captureMessage(error);
+    this.alert.showError(error);
   }
 
   ngOnInit() {

@@ -55,3 +55,12 @@ mat-dialog-container {
   text-decoration: none;
   color: inherit;
 }
+
+#feedback-btn {
+  position: fixed;
+  $distance: 5px;
+  left: $distance;
+  bottom: $distance;
+  z-index: 9999;
+  color: gray;
+}

@@ -13,6 +13,9 @@ import { Template } from '../models/template.model';
 import { AlertService } from './alert.service';
 import { TemplateField } from '../models/template-fields';
 
+import * as Raven from 'raven-js';
+
+
 @Injectable()
 export class ApiService {
 
@@ -198,6 +201,7 @@ export class ApiService {
   }
 
   private handleError(error: Error) {
+    Raven.captureException(error);
     console.error(error.message);
     this.alert.showError(error.message);
   }

@@ -14,6 +14,7 @@ import { AlertService } from './alert.service';
 import { FirstRunDialogComponent } from '../dialogs/first-run-dialog/first-run-dialog.component';
 import { UpdatesDialogComponent } from '../dialogs/updates-dialog/updates-dialog.component';
 import { Router } from '@angular/router';
+import * as Raven from 'raven-js';
 
 
 @Injectable()
@@ -50,6 +51,10 @@ export class UserService {
   }
 
   public setUser(user: User) {
+    Raven.setUserContext({
+      email: user.email,
+      id: user.id.toString()
+    });
     this.user.next(user);
     this.auth.userId = user.id;
     console.log(user);
