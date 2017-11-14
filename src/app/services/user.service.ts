@@ -51,6 +51,7 @@ export class UserService {
   }
 
   public setUser(user: User) {
+    if (!user) return
     Raven.setUserContext({
       email: user.email,
       id: user.id.toString()

@@ -54,7 +54,10 @@ export class TemplateSeriesDialogComponent implements OnInit {
   }
 
   onCSVFileChange(event) {
-    this.csvFile = event.srcElement.files[0];
+    if (!event || !event.target) {
+      return;
+    }
+    this.csvFile = event.target.files[0];
 
     const reader: FileReader = new FileReader();
 
