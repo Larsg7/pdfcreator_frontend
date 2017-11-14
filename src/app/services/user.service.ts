@@ -58,7 +58,6 @@ export class UserService {
     });
     this.user.next(user);
     this.auth.userId = user.id;
-    console.log(user);
     this.setTemplates(user.templates);
   }
 

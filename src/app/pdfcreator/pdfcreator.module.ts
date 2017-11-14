@@ -13,6 +13,7 @@ import { TemplateBasicsComponent } from './template-basics/template-basics.compo
 import { TemplatePlaceholdersComponent } from './template-placeholders/template-placeholders.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { HelpPageComponent } from './help-page/help-page.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HelpPageComponent } from './help-page/help-page.component';
     MaterialModule,
     PDFCreatorRouter,
     FormsModule,
+    PipesModule,
   ],
   exports: [
     PdfcreatorComponent,

@@ -64,6 +64,7 @@ export class TemplateService {
       this.api.newTemplateV1(template, this.auth.userId).subscribe((newTemplate: Template) => {
         this._templates.push(newTemplate);
         this.templates.next(this._templates);
+        console.log(this._templates)
         obs.next(newTemplate);
       }, error => obs.error(error));
     });

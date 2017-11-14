@@ -2,4 +2,10 @@
   <h2>{{ config.APP_NAME }} - Impressum</h2>
   <p>Entwickelt von <a href="https://github.com/Larsg7">Lars Gröber</a> für den
     <a href="http://www.starkerstart.uni-frankfurt.de/starkerstart">Starker Start ins Studium</a>.</p>
+
+  <p><strong class="mt-1">Version</strong><br>
+    Frontend: {{ config.VERSION }}<br>
+    Backend: {{ backendVersion | default:'lade...' }}</p>
+
+  <p><a href="https://github.com/Larsg7/pdfcreator">Quellcode</a> - <a href="https://github.com/Larsg7/pdfcreator/blob/master/LICENSE">Lizenz</a></p>
 </div>

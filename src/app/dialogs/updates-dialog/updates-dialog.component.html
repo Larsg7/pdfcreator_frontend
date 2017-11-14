@@ -1,24 +1,32 @@
 <h2 mat-dialog-title>Was ist neu im {{config.APP_NAME}} Version {{config.VERSION}}</h2>
 <mat-dialog-content style="overflow: hidden">
-
-  Neu:
   <ul>
-    <li>Ungenutzte Template Felder werden mit <strong>\Verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
-      darf daher nicht in der Definition von Template Feldern genutzt werden.</li>
-    <li>Beim Ausfüllen einer Serie an Templates können globale Platzhalter/Variablen angelegt werden.</li>
-    <li>Passwörter können zurückgesetzt werden.</li>
-    <li>Ein Feedbacksystem wurde implementiert.</li>
+    <li>Kleinere Fehlerbehebungen.</li>
   </ul>
-  Fixes:
-  <ul>
-    <li>Anführungszeichen und manche Sonderzeichen führen in Platzhaltern und Variablen zu keinen Problemen mehr.</li>
-  </ul>
-  Bekannte Probleme:
-  <ul>
-    <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund
-    der Nutzung von '\Verb' in "Math-Mode" wirft.</li>
-  </ul>
-
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Version 0.7.0
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Neu:
+    <ul>
+      <li>Ungenutzte Template Felder werden mit <strong>\Verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
+        darf daher nicht in der Definition von Template Feldern genutzt werden.</li>
+      <li>Beim Ausfüllen einer Serie an Templates können globale Platzhalter/Variablen angelegt werden.</li>
+      <li>Passwörter können zurückgesetzt werden.</li>
+      <li>Ein Feedbacksystem wurde implementiert.</li>
+    </ul>
+    Fixes:
+    <ul>
+      <li>Anführungszeichen und manche Sonderzeichen führen in Platzhaltern und Variablen zu keinen Problemen mehr.</li>
+    </ul>
+    Bekannte Probleme:
+    <ul>
+      <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund
+        der Nutzung von '\Verb' in "Math-Mode" wirft.</li>
+    </ul>
+  </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>

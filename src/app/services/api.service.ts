@@ -6,6 +6,7 @@ import { CONFIG } from '../../config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { AuthService } from './auth.service';
 import { LoadingService } from './loading.service';
 import { Subject } from 'rxjs/Subject';
@@ -130,9 +131,8 @@ export class ApiService {
           return String.fromCharCode(+('0x' + p1));
         }));
     }
-
     const apiFields = fields ? fields.map(f => f.map(_ => _.toApi())) : [];
-    const fieldsEncoded = b64EncodeUnicode(JSON.stringify(apiFields));
+    const fieldsEncoded = apiFields.length ? b64EncodeUnicode(JSON.stringify(apiFields)) : '';
 
     const request = this.makeGraphQlQuery(`
     query {
@@ -183,6 +183,11 @@ export class ApiService {
     return this.makeRequest(request);
   }
 
+  getBackendVersion(): Observable<{version: string}> {
+    return this.httpClient.get(`${CONFIG.API_URL}/api/v1/version`)
+      .catch(this.handleError);
+  }
+
   downloadTemplateLinkV1(template): Observable<string> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
     const request = this.httpClient.get(`${CONFIG.API_URL}/api/v1/document/download/${template.id}`, {
@@ -200,10 +205,16 @@ export class ApiService {
     return res;
   }
 
-  private handleError(error: Error) {
-    Raven.captureException(error);
-    console.error(error.message);
-    this.alert.showError(error.message);
+  private handleError(error: Error | string) {
+    const message = error instanceof Error ? error.message : error;
+    if (error instanceof Error) {
+      Raven.captureException(error);
+    } else {
+      Raven.captureMessage(error);
+    }
+    console.error(message);
+    this.alert.showError(message);
+    return Observable.throw(error);
   }
 
   private checkForErrors(res) {

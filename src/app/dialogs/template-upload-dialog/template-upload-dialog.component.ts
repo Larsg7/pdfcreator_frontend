@@ -34,7 +34,6 @@ export class TemplateUploadDialogComponent implements OnInit {
 
   upload() {
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status);
       if (status !== 200) {
         this.alert.showError('Es gab ein Problem beim Hochladen der Datei.');
       } else {
