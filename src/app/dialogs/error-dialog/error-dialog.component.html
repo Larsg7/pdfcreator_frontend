@@ -1,9 +1,17 @@
-<h2 mat-dialog-title>Oops, ein Fehler ist aufgetreten!</h2>
+<h2 mat-dialog-title>{{message || 'Oops, es ist ein Fehler aufgetreten'}}</h2>
 <mat-dialog-content>
-  <p>Dies hat das Backend zurückgeschickt:</p>
-  <pre>
-    {{ message | json }}
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dies hat das Backend zurückgeschickt
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <pre>
+    {{ rawError | json }}
   </pre>
+  </mat-expansion-panel>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Schließen</button>

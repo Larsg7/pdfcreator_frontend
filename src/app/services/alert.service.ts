@@ -15,8 +15,29 @@ export class AlertService {
     });
   }
 
-  showError(message: string) {
-    return this.showDialog(ErrorDialogComponent, {message: message});
+  showError(rawError: string) {
+    const errorRegex = new RegExp('E(\\d{4})');
+    const match = errorRegex.exec(rawError);
+    let message = '';
+    if (match && match.length >= 2) {
+      const errorCode = match[1];
+      message = this.getErrorForCode(errorCode);
+    }
+    console.log(match, errorRegex)
+    return this.showDialog(ErrorDialogComponent, {rawError, message});
+  }
+
+  private getErrorForCode(errorCode: string) {
+    switch (errorCode) {
+      case "1000":
+        return "Dieser Login existiert bereits.";
+      case "1010":
+        return "Login oder Password inkorrekt."
+      case "2000":
+        return "Es gab einen Fehle bei der Latex Kompilierung."
+      default:
+        return '';
+    }
   }
 
   showDialog(component: any, data: any, disableClose = false): Promise<any> {

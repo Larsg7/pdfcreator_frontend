@@ -8,15 +8,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class ErrorDialogComponent implements OnInit {
 
-  message: any;
+  rawError: any;
+  message: string;
 
   constructor(public dialogRef: MatDialogRef<ErrorDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    const message = data ? data.message : '';
+    const rawError = data ? data.rawError : '';
+    this.message = data ? data.message : 'Oops, es ist ein Fehler aufgetreten';
     try {
-      this.message = JSON.parse(message);
+      this.rawError = JSON.parse(rawError);
     } catch (e) {
-      this.message = message;
+      this.rawError = rawError;
     }
   }
 
