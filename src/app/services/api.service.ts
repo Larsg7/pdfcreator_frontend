@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user.model';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
-import { CONFIG } from '../../config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -15,6 +14,7 @@ import { AlertService } from './alert.service';
 import { TemplateField } from '../models/template-fields';
 
 import * as Raven from 'raven-js';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
@@ -184,20 +184,20 @@ export class ApiService {
   }
 
   getBackendVersion(): Observable<{version: string}> {
-    return this.httpClient.get(`${CONFIG.API_URL}/api/v1/version`)
+    return this.httpClient.get(`${environment.API_URL}/api/v1/version`)
       .catch(this.handleError);
   }
 
   downloadTemplateLinkV1(template): Observable<string> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
-    const request = this.httpClient.get(`${CONFIG.API_URL}/api/v1/document/download/${template.id}`, {
+    const request = this.httpClient.get(`${environment.API_URL}/api/v1/document/download/${template.id}`, {
       headers: headers
     }).map((res: {link: string}) => res.link);
     return this.makeRequest(request);
   }
 
   private makeGraphQlQuery(query: string): Observable<any> {
-    return this.httpClient.post(`${CONFIG.API_URL}/api/v1/graphql`, query);
+    return this.httpClient.post(`${environment.API_URL}/api/v1/graphql`, query);
   }
 
   private getData(res: any, ...keys) {

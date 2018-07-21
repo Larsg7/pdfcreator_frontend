@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CONFIG } from '../../../config';
 import { FileUploader } from 'ng2-file-upload';
 import { TemplateService } from '../../services/template.service';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { MatDialogRef } from '@angular/material';
+import { environment } from '../../../environments/environment';
 
 function uploadUrl(id: number) {
-  return CONFIG.API_URL + '/api/v1/document/' + id;
+  return environment.API_URL + '/api/v1/document/' + id;
 }
 
 @Component({

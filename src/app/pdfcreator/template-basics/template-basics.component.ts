@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dia
 import { Router } from '@angular/router';
 import { TemplateUploadDialogComponent } from '../../dialogs/template-upload-dialog/template-upload-dialog.component';
 import { ApiService } from '../../services/api.service';
-import { CONFIG } from '../../../config';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-template-basics',
@@ -26,7 +26,7 @@ export class TemplateBasicsComponent implements OnInit {
 
   ngOnInit() {
     this.templateService.activeTemplateSub.subscribe(template => {
-      this.templateLink = `${CONFIG.API_URL}/api/v1/document/${template.token}`;
+      this.templateLink = `${environment.API_URL}/api/v1/document/${template.token}`;
     });
   }
 

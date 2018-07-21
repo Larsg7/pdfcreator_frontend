@@ -1,8 +1,19 @@
 <h2 mat-dialog-title>Was ist neu im {{config.APP_NAME}} Version {{config.VERSION}}</h2>
 <mat-dialog-content style="overflow: hidden">
+  Neu:
   <ul>
-    <li>Kleinere Fehlerbehebungen.</li>
+    <li>Bessere Fehlermeldungen beim Anmelden und Registrieren.</li>
   </ul>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Version 0.7.1
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>Kleinere Fehlerbehebungen.</li>
+    </ul>
+  </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -11,7 +22,10 @@
     </mat-expansion-panel-header>
     Neu:
     <ul>
-      <li>Ungenutzte Template Felder werden mit <strong>\Verb|...|</strong> umschlossen. <br>Das Zeichen <strong>|</strong>
+      <li>Ungenutzte Template Felder werden mit
+        <strong>\Verb|...|</strong> umschlossen.
+        <br>Das Zeichen
+        <strong>|</strong>
         darf daher nicht in der Definition von Template Feldern genutzt werden.</li>
       <li>Beim Ausfüllen einer Serie an Templates können globale Platzhalter/Variablen angelegt werden.</li>
       <li>Passwörter können zurückgesetzt werden.</li>
@@ -23,8 +37,8 @@
     </ul>
     Bekannte Probleme:
     <ul>
-      <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund
-        der Nutzung von '\Verb' in "Math-Mode" wirft.</li>
+      <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund der Nutzung
+        von '\Verb' in "Math-Mode" wirft.</li>
     </ul>
   </mat-expansion-panel>
   <mat-expansion-panel>
@@ -38,7 +52,8 @@
       <li>LaTeX Dokumente werden nun als zip Datei hochgeladen.</li>
       <li>Alle Templates sind Teil eines Nutzeraccounts.</li>
       <li>Bei dem Erstellen einer Serie werden die Werte als editierbare Tabelle angezeigt.</li>
-      <li>Es können Kommentare zu Platzhaltern und Variablen geschrieben werden: << Name ; Kommentar >>.</li>
+      <li>Es können Kommentare zu Platzhaltern und Variablen geschrieben werden:
+        << Name ; Kommentar>>.</li>
     </ul>
     Bekannte Probleme:
     <ul>
