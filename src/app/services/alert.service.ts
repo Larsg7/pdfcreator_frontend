@@ -3,10 +3,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ErrorDialogComponent } from '../dialogs/error-dialog/error-dialog.component';
 @Injectable()
 export class AlertService {
-
-  constructor(private snackBar: MatSnackBar,
-              private dialog: MatDialog) {
-  }
+  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {}
 
   showSnack(text: string, code = 1) {
     const duration = code === 0 ? 9000 : 5000;
@@ -23,18 +20,19 @@ export class AlertService {
       const errorCode = match[1];
       message = this.getErrorForCode(errorCode);
     }
-    console.log(match, errorRegex)
-    return this.showDialog(ErrorDialogComponent, {rawError, message});
+    return this.showDialog(ErrorDialogComponent, { rawError, message });
   }
 
   private getErrorForCode(errorCode: string) {
     switch (errorCode) {
-      case "1000":
-        return "Dieser Login existiert bereits.";
-      case "1010":
-        return "Login oder Password inkorrekt."
-      case "2000":
-        return "Es gab einen Fehle bei der Latex Kompilierung."
+      case '1000':
+        return 'Dieser Login existiert bereits.';
+      case '1010':
+        return 'Login oder Password inkorrekt.';
+      case '1020':
+        return 'Token Signatur ist nicht valide, bitte erneut einloggen.';
+      case '2000':
+        return 'Es gab einen Fehler bei der Latex Kompilierung.';
       default:
         return '';
     }
@@ -44,7 +42,7 @@ export class AlertService {
     return new Promise((res, rej) => {
       const dialog = this.dialog.open(component, {
         data: data,
-        disableClose: disableClose
+        disableClose: disableClose,
       });
       dialog.afterClosed().subscribe(result => {
         res(result);

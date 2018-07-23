@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   API_URL: 'https://pdfcreator-backend.larsgroeber.com',
+  // API_URL: 'http://localhost:5000',
 };
