@@ -1,14 +1,25 @@
 import { NgModule } from '@angular/core';
 import {
-  MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatTableModule,
-  MatToolbarModule, MatTooltipModule
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +43,7 @@ import {
     MatGridListModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatButtonModule,
@@ -52,8 +64,8 @@ import {
     MatTableModule,
     MatGridListModule,
     MatSliderModule,
+    MatProgressSpinnerModule,
     MatSlideToggleModule,
-  ]
+  ],
 })
-export class MaterialModule {
-}
+export class MaterialModule {}
