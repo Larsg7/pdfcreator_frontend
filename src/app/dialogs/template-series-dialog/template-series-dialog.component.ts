@@ -11,10 +11,9 @@ import { MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-template-series-dialog',
   templateUrl: './template-series-dialog.component.html',
-  styleUrls: ['./template-series-dialog.component.scss']
+  styleUrls: ['./template-series-dialog.component.scss'],
 })
 export class TemplateSeriesDialogComponent implements OnInit {
-
   csvFile: File;
   private csvFileKeys: string[] = [];
   public csvFileJson: JSON[];
@@ -27,12 +26,13 @@ export class TemplateSeriesDialogComponent implements OnInit {
 
   @ViewChild('fileUpload') fileInput: ElementRef;
 
-  constructor(private templateService: TemplateService,
-              private alert: AlertService,
-              public dialogRef: MatDialogRef<TemplateSeriesDialogComponent>) { }
+  constructor(
+    private templateService: TemplateService,
+    private alert: AlertService,
+    public dialogRef: MatDialogRef<TemplateSeriesDialogComponent>
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   chooseFile() {
     this.fileInput.nativeElement.click();
@@ -47,7 +47,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
       });
       templateFields.push(templateField.concat(this.globalTemplateFields));
     });
-    console.log(templateFields)
+    console.log(templateFields);
     this.templateService.activeTemplate.fields = templateFields;
     this.templateService.reloadTemplate();
     this.closeDialog();
@@ -61,16 +61,21 @@ export class TemplateSeriesDialogComponent implements OnInit {
 
     const reader: FileReader = new FileReader();
 
+    console.log(this.csvFile.type);
+
     if (!this.csvFile) {
       return;
     }
-    if (!this.csvFile.type.match(/text.*/) && this.csvFile.type !== '') {
+    if (
+      !this.csvFile.type.match(/text\/.*|.*csv.*/) &&
+      this.csvFile.type !== ''
+    ) {
       this.alert.showSnack('Dieser Filetyp wird nicht unterstützt.');
       this.csvFile = null;
       return;
     }
 
-    reader.onload = (e) => {
+    reader.onload = e => {
       try {
         this.csvFileKeys = TableDecoderService.getKeys(reader.result);
         this.csvFileJson = TableDecoderService.csvToJson(reader.result);
@@ -78,7 +83,9 @@ export class TemplateSeriesDialogComponent implements OnInit {
         console.log(this.csvFileKeys, this.csvFileJson);
         this.fileOk = true;
       } catch (err) {
-        this.alert.showSnack('Die Namen der Spalten decken sich nicht mit den vorhandenen Platzhaltern/Variablen!');
+        this.alert.showSnack(
+          'Die Namen der Spalten decken sich nicht mit den vorhandenen Platzhaltern/Variablen!'
+        );
       }
     };
 
@@ -111,7 +118,9 @@ export class TemplateSeriesDialogComponent implements OnInit {
 
   createTable() {
     this.csvFileKeys = this.templateService.activeTemplate.fields[0]
-      .filter(_ => !this.globalTemplateFields.find(__ => __.content === _.content))
+      .filter(
+        _ => !this.globalTemplateFields.find(__ => __.content === _.content)
+      )
       .map(_ => _.content);
     this.csvFileJson = [];
     this.addRow();
@@ -123,7 +132,9 @@ export class TemplateSeriesDialogComponent implements OnInit {
   }
 
   globalFieldsChanged(event) {
-    this.globalTemplateFields = event.value.map(_ => new TemplateField(_, '', ''));
+    this.globalTemplateFields = event.value.map(
+      _ => new TemplateField(_, '', '')
+    );
   }
 }
 

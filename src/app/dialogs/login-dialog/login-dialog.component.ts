@@ -1,3 +1,5 @@
+import { LoadingService } from './../../services/loading.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MatDialogRef } from '@angular/material';
@@ -9,16 +11,18 @@ import { PasswordForgotDialogComponent } from '../password-forgot-dialog/passwor
 @Component({
   selector: 'app-account-dialog',
   templateUrl: './login-dialog.component.html',
-  styleUrls: ['./login-dialog.component.scss']
+  styleUrls: ['./login-dialog.component.scss'],
 })
 export class LoginDialogComponent implements OnInit {
-
   formGroup: FormGroup;
 
-  constructor(private userService: UserService,
-              public dialogRef: MatDialogRef<LoginDialogComponent>,
-              public alert: AlertService,
-              private formBuilder: FormBuilder) {
+  constructor(
+    private userService: UserService,
+    public dialogRef: MatDialogRef<LoginDialogComponent>,
+    public alert: AlertService,
+    private formBuilder: FormBuilder,
+    public loadingService: LoadingService
+  ) {
     this.formGroup = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -33,22 +37,21 @@ export class LoginDialogComponent implements OnInit {
     const username = this.formGroup.get('username').value;
     const password = this.formGroup.get('password').value;
 
-    this.userService.login(username, password).subscribe(
-      () => {
+    this.userService.login(username, password).subscribe(res => {
+      if (res) {
         this.alert.showSnack('Du bist eingeloggt.');
         this.dialogRef.close(true);
       }
-    );
+    });
   }
 
   register() {
-    this.alert.showDialog(RegisterDialogComponent, {}).then((res) => {
+    this.alert.showDialog(RegisterDialogComponent, {}).then(res => {
       if (res) this.dialogRef.close(true);
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   forgotPassword() {
     this.alert.showDialog(PasswordForgotDialogComponent, {});

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { matchOtherValidator } from '../register-dialog/register-dialog.component';
-import { CONFIG } from '../../../config';
 import { AlertService } from '../../services/alert.service';
 import { Http } from '@angular/http';
 import * as Raven from 'raven-js';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -19,8 +19,8 @@ export class PasswordForgotDialogComponent implements OnInit {
   newPasswordForm: FormGroup;
 
   authenticated = false;
-  readonly authUrl = `${CONFIG.API_URL}/api/v1/password`;
-  readonly resetUrl = `${CONFIG.API_URL}/api/v1/password/reset`;
+  readonly authUrl = `${environment.API_URL}/api/v1/password`;
+  readonly resetUrl = `${environment.API_URL}/api/v1/password/reset`;
 
   constructor(public dialogRef: MatDialogRef<PasswordForgotDialogComponent>,
               private formBuilder: FormBuilder,

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
-import { CONFIG } from '../../../config';
 import { MatDialogRef } from '@angular/material';
 import { AlertService } from '../../services/alert.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-feedback-dialog',
@@ -40,7 +40,7 @@ export class FeedbackDialogComponent implements OnInit {
     const type = this.formGroup.get('type').value;
     const feedback = this.formGroup.get('feedback').value;
 
-    this.http.post(`${CONFIG.API_URL}/api/v1/feedback`, {
+    this.http.post(`${environment.API_URL}/api/v1/feedback`, {
       Name: name,
       Type: type,
       Feedback: feedback,
