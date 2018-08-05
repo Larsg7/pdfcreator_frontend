@@ -66,10 +66,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
     if (!this.csvFile) {
       return;
     }
-    if (
-      !this.csvFile.type.match(/text\/.*|.*csv.*/) &&
-      this.csvFile.type !== ''
-    ) {
+    if (this.csvFile.type === '') {
       this.alert.showSnack('Dieser Filetyp wird nicht unterstützt.');
       this.csvFile = null;
       return;
