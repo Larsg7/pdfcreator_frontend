@@ -16,15 +16,15 @@ import { UpdatesDialogComponent } from '../dialogs/updates-dialog/updates-dialog
 import { Router } from '@angular/router';
 import * as Raven from 'raven-js';
 
-
 @Injectable()
 export class UserService {
-
   public user: ReplaySubject<User> = new ReplaySubject(1);
 
-  constructor(private api: ApiService,
-              private auth: AuthService,
-              private templateService: TemplateService) {
+  constructor(
+    private api: ApiService,
+    private auth: AuthService,
+    private templateService: TemplateService
+  ) {
     this.setup();
   }
 
@@ -35,26 +35,22 @@ export class UserService {
   }
 
   public login(username: string, password: string): Observable<any> {
-    return Observable.create(obs => {
-      this.api.authorizeV1(username, password).subscribe(
-        ([token, user]) => {
-          this.auth.token = token;
-          this.setUser(user);
-          if (this.auth.isUserLoggedIn()) {
-            obs.next();
-          } else {
-            obs.error();
-          }
-        }
-      );
+    return this.api.authorizeV1(username, password).map(([token, user]) => {
+      this.auth.token = token;
+      this.setUser(user);
+      if (this.auth.isUserLoggedIn()) {
+        return true;
+      } else {
+        return false;
+      }
     });
   }
 
   public setUser(user: User) {
-    if (!user) return
+    if (!user) return;
     Raven.setUserContext({
       email: user.email,
-      id: user.id.toString()
+      id: user.id.toString(),
     });
     this.user.next(user);
     this.auth.userId = user.id;
@@ -63,10 +59,13 @@ export class UserService {
 
   public updateUser(username: string, password: string, email: string) {
     return Observable.create(obs => {
-      this.user.asObservable().first().subscribe(oldUser => {
-        this.api.updateUserV1(oldUser.id, username, password, email)
-          .subscribe(
-            (user) => {
+      this.user
+        .asObservable()
+        .first()
+        .subscribe(oldUser => {
+          this.api
+            .updateUserV1(oldUser.id, username, password, email)
+            .subscribe(user => {
               if (!user) {
                 obs.error();
               }
@@ -74,7 +73,7 @@ export class UserService {
               this.setUser(user);
               obs.next();
             });
-      })
+        });
     });
   }
 
@@ -83,8 +82,6 @@ export class UserService {
   }
 
   private getActiveUser() {
-    this.api.activeUserV1().subscribe(
-      user => this.setUser(user),
-    );
+    this.api.activeUserV1().subscribe(user => this.setUser(user));
   }
 }

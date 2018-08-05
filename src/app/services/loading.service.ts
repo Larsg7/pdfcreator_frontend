@@ -1,51 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/operator/delay';
 
-export interface LoadingTracker {
+export interface ILoadingStatus {
+  isLoading: Observable<boolean>;
+}
+
+export interface ILoadingTracker {
   requestAdded: () => void;
   requestCompleted: () => void;
 }
 
-@Injectable()
-export class LoadingService implements LoadingTracker {
+export class LoadingTracker implements ILoadingTracker, ILoadingStatus {
   private openRequests = new BehaviorSubject(0);
-  private subscriptions = new Subscription();
 
-  private set sink(sub: Subscription) {
-    this.subscriptions.add(sub);
-  }
-
-  constructor() {
-  }
-
-  public addRequest(req: Observable<any>) {
-    if (req) {
-      let requestDone = false;
-      this.requestAdded();
-      const timeout = setTimeout(() => {
-        this.requestCompleted();
-      }, 30000);
-      this.sink = req.subscribe(_next => {
-        clearTimeout(timeout);
-        if (!requestDone) {
-          this.requestCompleted();
-        }
-        requestDone = true;
-      }, _err => {
-        clearTimeout(timeout);
-        if (!requestDone) {
-          this.requestCompleted();
-        }
-        requestDone = true;
-      });
-    } else {
-      this.openRequests.next(0);
-    }
-  }
+  constructor() {}
 
   public requestCompleted() {
     // setTimeout needed to avoid change detection errors in angular dev
@@ -61,7 +32,67 @@ export class LoadingService implements LoadingTracker {
     }, 0);
   }
 
-  public get isLoading(): Observable<boolean> {
-    return this.openRequests.map(c => c > 0);
+  public isLoading: Observable<boolean> = this.openRequests.map(c => c > 0);
+
+  get isCurrentlyLoading(): boolean {
+    return this.openRequests.getValue() > 0;
+  }
+}
+
+@Injectable()
+export class LoadingService extends LoadingTracker {
+  constructor() {
+    super();
+  }
+}
+
+export class LoadingSubscriber implements ILoadingTracker {
+  private complete = false;
+
+  constructor(private loadingService: ILoadingTracker) {}
+
+  public requestCompleted() {
+    if (!this.complete) {
+      this.loadingService.requestCompleted();
+      this.complete = true;
+    }
+  }
+
+  public requestAdded() {
+    this.loadingService.requestAdded();
+    this.complete = false;
+  }
+}
+
+function trackLoading<T>(this: Observable<T>, loadingService: ILoadingTracker) {
+  const loadingSub = new LoadingSubscriber(loadingService);
+  return Observable.create(subscriber => {
+    loadingSub.requestAdded();
+    return this.subscribe(
+      value => {
+        try {
+          subscriber.next(value);
+        } catch (err) {
+          subscriber.error(err);
+        }
+        loadingSub.requestCompleted();
+      },
+      err => {
+        subscriber.error(err);
+        loadingSub.requestCompleted();
+      },
+      () => {
+        subscriber.complete();
+        loadingSub.requestCompleted();
+      }
+    );
+  });
+}
+
+Observable.prototype.trackLoading = trackLoading;
+
+declare module 'rxjs/Observable' {
+  interface Observable<T> {
+    trackLoading: typeof trackLoading;
   }
 }

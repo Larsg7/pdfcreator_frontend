@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Anmeldung</h2>
 <mat-dialog-content>
-  <form [formGroup]="formGroup" *ngIf="!(loading$ | async); else loading">
+  <form [formGroup]="formGroup" *ngIf="!(loadingService.isLoading | async); else loading">
     <mat-form-field>
       <input matInput placeholder="Nutzername" name="username" formControlName="username">
     </mat-form-field>
@@ -16,7 +16,7 @@
   </ng-template>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="login()" type="submit" [disabled]="formGroup.invalid || (loading$ | async)">
+  <button mat-raised-button color="primary" (click)="login()" type="submit" [disabled]="formGroup.invalid || (loadingService.isLoading | async)">
     Einloggen
   </button>
   <button mat-button (click)="register()">Registrieren</button>

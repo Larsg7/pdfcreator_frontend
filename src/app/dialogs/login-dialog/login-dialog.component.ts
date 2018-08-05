@@ -1,3 +1,4 @@
+import { LoadingService } from './../../services/loading.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
@@ -14,13 +15,13 @@ import { PasswordForgotDialogComponent } from '../password-forgot-dialog/passwor
 })
 export class LoginDialogComponent implements OnInit {
   formGroup: FormGroup;
-  loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private userService: UserService,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     public alert: AlertService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public loadingService: LoadingService
   ) {
     this.formGroup = this.formBuilder.group({
       username: ['', Validators.required],
@@ -35,16 +36,13 @@ export class LoginDialogComponent implements OnInit {
 
     const username = this.formGroup.get('username').value;
     const password = this.formGroup.get('password').value;
-    this.loading$.next(true);
 
-    this.userService.login(username, password).subscribe(
-      () => {
+    this.userService.login(username, password).subscribe(res => {
+      if (res) {
         this.alert.showSnack('Du bist eingeloggt.');
         this.dialogRef.close(true);
-        this.loading$.next(false);
-      },
-      () => this.loading$.next(false)
-    );
+      }
+    });
   }
 
   register() {

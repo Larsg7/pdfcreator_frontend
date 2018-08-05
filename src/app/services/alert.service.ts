@@ -28,7 +28,7 @@ export class AlertService {
       case '1000':
         return 'Dieser Login existiert bereits.';
       case '1010':
-        return 'Login oder Password inkorrekt.';
+        return 'Login oder Passwort ist inkorrekt.';
       case '1020':
         return 'Token Signatur ist nicht valide, bitte erneut einloggen.';
       case '2000':
