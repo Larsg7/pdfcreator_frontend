@@ -1,9 +1,20 @@
 <h2 mat-dialog-title>Was ist neu im {{config.APP_NAME}} Version {{config.VERSION}}</h2>
 <mat-dialog-content style="overflow: hidden">
   <ul>
-    <li>Bessere Fehlermeldungen beim Anmelden, Registrieren und LaTeX Kompilierung.</li>
+    <li>Der Serien-Bearbeiten Dialog speichert nun die eingegeben Daten.</li>
     <li>Kleinere Fehlerbehebungen.</li>
   </ul>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Version 0.7.2
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>Bessere Fehlermeldungen beim Anmelden, Registrieren und LaTeX Kompilierung.</li>
+      <li>Kleinere Fehlerbehebungen.</li>
+    </ul>
+  </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -37,8 +48,8 @@
     </ul>
     Bekannte Probleme:
     <ul>
-      <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund der Nutzung
-        von '\Verb' in "Math-Mode" wirft.</li>
+      <li>Template Felder dürfen nicht in '$...$' gesetzt werden, da ansonsten der Latex compiler einen Fehler aufgrund der
+        Nutzung von '\Verb' in "Math-Mode" wirft.</li>
     </ul>
   </mat-expansion-panel>
   <mat-expansion-panel>
@@ -53,7 +64,8 @@
       <li>Alle Templates sind Teil eines Nutzeraccounts.</li>
       <li>Bei dem Erstellen einer Serie werden die Werte als editierbare Tabelle angezeigt.</li>
       <li>Es können Kommentare zu Platzhaltern und Variablen geschrieben werden:
-        << Name ; Kommentar>>.</li>
+        << Name ; Kommentar>>.
+      </li>
     </ul>
     Bekannte Probleme:
     <ul>

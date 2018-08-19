@@ -159,17 +159,28 @@ export class TemplateSeriesDialogComponent implements OnInit {
     this.updateTableData();
   }
 
+  private get jsonLocalStorageKey() {
+    return `series-json-${this.templateService.activeTemplate.id}`;
+  }
+
+  private get globalLocalStorageKey() {
+    return `series-global-${this.templateService.activeTemplate.id}`;
+  }
+
   private saveSeries() {
-    localStorage.setItem('series-json', JSON.stringify(this.csvFileJson));
     localStorage.setItem(
-      'series-global',
-      JSON.stringify(this.globalTemplateFields)
+      this.jsonLocalStorageKey,
+      JSON.stringify(this.csvFileJson || [])
+    );
+    localStorage.setItem(
+      this.globalLocalStorageKey,
+      JSON.stringify(this.globalTemplateFields || [])
     );
   }
 
   private getSavedSeries() {
-    const json = localStorage.getItem('series-json');
-    const global = localStorage.getItem('series-global');
+    const json = localStorage.getItem(this.jsonLocalStorageKey);
+    const global = localStorage.getItem(this.globalLocalStorageKey);
     if (!json || !global) {
       return;
     }
