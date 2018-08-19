@@ -18,6 +18,8 @@ export class LoadingTracker implements ILoadingTracker, ILoadingStatus {
 
   constructor() {}
 
+  public isLoading: Observable<boolean> = this.openRequests.map(c => c > 0);
+
   public requestCompleted() {
     // setTimeout needed to avoid change detection errors in angular dev
     setTimeout(() => {
@@ -31,8 +33,6 @@ export class LoadingTracker implements ILoadingTracker, ILoadingStatus {
       this.openRequests.next(this.openRequests.getValue() + 1);
     }, 0);
   }
-
-  public isLoading: Observable<boolean> = this.openRequests.map(c => c > 0);
 
   get isCurrentlyLoading(): boolean {
     return this.openRequests.getValue() > 0;
