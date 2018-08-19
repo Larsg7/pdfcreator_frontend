@@ -19,11 +19,8 @@ import { FeedbackService } from './feedback.service';
     AuthService,
     ThemeService,
     LoadingService,
-    TableDecoderService,
     FeedbackService,
   ],
-  imports: [
-    HttpClientModule,
-  ]
+  imports: [HttpClientModule],
 })
-export class ServiceModule { }
+export class ServiceModule {}
