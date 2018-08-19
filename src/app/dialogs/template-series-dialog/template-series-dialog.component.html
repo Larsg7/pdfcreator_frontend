@@ -8,8 +8,8 @@
     </mat-expansion-panel-header>
     <p>Bitte beachte die folgenden Punkte:</p>
     <ul>
-      <li>Du kannst eine <strong>CSV</strong> Datei hochladen. Eine solche Datei kann z.B. mit Excel oder LibreOffice
-        erstellt werden.
+      <li>Du kannst eine <strong>CSV</strong> Datei hochladen. Eine solche Datei kann z.B. mit Excel oder LibreOffice erstellt
+        werden.
       </li>
       <li>Die Werte einer Zeile müssen durch ein Kommar getrennt werden und einzelne Werte müssen mit <strong>"</strong>
         eingegrenzt sein..
@@ -49,7 +49,7 @@
 
   <div *ngIf="csvFileJson && csvFileJson.length">
     <mat-table #table [dataSource]="tableDataSource">
-      <ng-container matColumnDef="{{ key }}" *ngFor="let key of csvFileKeys">
+      <ng-container matColumnDef="{{ key }}" *ngFor="let key of visibleKeys">
         <mat-header-cell *matHeaderCellDef>{{ key }}</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field class="table-form-field">
@@ -67,8 +67,8 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="csvFileKeys"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: csvFileKeys.concat(['delete']);"></mat-row>
+      <mat-header-row *matHeaderRowDef="visibleKeys"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: visibleKeys.concat(['delete']);"></mat-row>
     </mat-table>
     <button mat-raised-button color="accent" style="margin: 10px 0 10px 0" (click)="addRow()">Zeile hinzufügen</button>
   </div>
@@ -76,4 +76,5 @@
 <mat-dialog-actions>
   <button mat-button [disabled]="!csvFileJson || csvFileJson.length == 0" (click)="generate()">Generieren</button>
   <button mat-button (click)="closeDialog()">Schließen</button>
+  <button mat-button (click)="reset()">Reset</button>
 </mat-dialog-actions>
