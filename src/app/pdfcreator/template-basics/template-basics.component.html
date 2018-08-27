@@ -1,6 +1,5 @@
 <mat-card id="template-display" *ngIf="templateService.activeTemplate">
 
-  <mat-card-title>{{ templateService.activeTemplate?.name }}</mat-card-title>
   <mat-card-content>{{ templateService.activeTemplate?.description }}</mat-card-content>
 
   <mat-card-actions>
@@ -10,11 +9,13 @@
     <button mat-raised-button color="accent" (click)="upload()" matTooltip="LaTeX Dokument hochladen">
       <mat-icon>file_upload</mat-icon>
     </button>
-    <a [href]="templateLink" [download]="templateService.activeTemplate?.name" *ngIf="templateService.activeTemplate?.token">
-      <button mat-raised-button color="accent" matTooltip="LaTeX Dokument herunterladen">
-        <mat-icon>file_download</mat-icon>
-      </button>
-    </a>
+    <ng-container *ngIf="templateService.activeTemplate?.token">
+      <a [href]="templateLink" [download]="templateService.activeTemplate?.name">
+        <button mat-raised-button color="accent" matTooltip="LaTeX Dokument herunterladen">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </a>
+    </ng-container>
     <button mat-raised-button color="warn" (click)="remove()" matTooltip="Template Löschen">
       <mat-icon>delete</mat-icon>
     </button>

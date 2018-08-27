@@ -1,5 +1,14 @@
 <div id="template-display">
-  <app-template-basics></app-template-basics>
+  <mat-expansion-panel [expanded]="templateService.activeTemplate && !templateService.activeTemplate?.document">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Template bearbeiten
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-template-basics></app-template-basics>
+  </mat-expansion-panel>
   <div *ngIf="templateService.activeTemplate">
     <div id="template-view" class="row" *ngIf="templateService.activeTemplate?.document || templateService.activeTemplate?.fields?.length; else noDocument">
       <div class="template-view-item col-sm-12 col-md-5 col-lg-4" *ngIf="templateService.activeTemplate?.fields.length">
