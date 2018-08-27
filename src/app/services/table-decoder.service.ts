@@ -1,30 +1,35 @@
-import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
-@Injectable()
 export class TableDecoderService {
-
-  constructor() { }
+  constructor() {}
 
   public static csvToJson(csv: string, expectedKeys?: string[]): JSON[] {
     const result = [];
     const lines = csv.split('\n');
     let keys: string[];
     for (const line of lines) {
-      if (!line) continue;
+      if (!line) {
+        continue;
+      }
       // Get the keys
       if (!keys && line[0] !== ',') {
         keys = TableDecoderService.removeQuotesAndWhitespaces(line.split('",'));
         if (expectedKeys) {
-          if (expectedKeys.length !== keys.length) throw new Error('Keys do not match!');
+          if (expectedKeys.length !== keys.length) {
+            throw new Error('Keys do not match!');
+          }
           _.each(expectedKeys, k => {
-            if (keys.indexOf(k) === -1) throw new Error('Keys do not match!');
+            if (keys.indexOf(k) === -1) {
+              throw new Error('Keys do not match!');
+            }
           });
         }
         continue;
       }
       // Generate result
-      const data = TableDecoderService.removeQuotesAndWhitespaces(line.split('",'));
+      const data = TableDecoderService.removeQuotesAndWhitespaces(
+        line.split('",')
+      );
       const lineJson = {};
       _.each(keys, (k, i) => {
         lineJson[k] = data[i];
@@ -51,5 +56,4 @@ export class TableDecoderService {
     });
     return result;
   }
-
 }
