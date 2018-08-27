@@ -1,3 +1,4 @@
+import { TemplateFieldApiModel } from './../../models/template-fields';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TableDecoderService } from '../../services/table-decoder.service';
 import { TemplateService } from '../../services/template.service';
@@ -46,7 +47,7 @@ export class TemplateSeriesDialogComponent implements OnInit {
     const templateFields: TemplateField[][] = [];
     this.csvFileJson.forEach(page => {
       const templateField: TemplateField[] = [];
-      this.csvFileKeys.forEach(key => {
+      this.visibleKeys.forEach(key => {
         templateField.push(new TemplateField(key, '', page[key]));
       });
       templateFields.push(templateField.concat(this.globalTemplateFields));
@@ -64,8 +65,6 @@ export class TemplateSeriesDialogComponent implements OnInit {
     this.csvFile = event.target.files[0];
 
     const reader: FileReader = new FileReader();
-
-    console.log(this.csvFile.type);
 
     if (!this.csvFile) {
       return;
@@ -185,7 +184,9 @@ export class TemplateSeriesDialogComponent implements OnInit {
       return;
     }
     try {
-      this.globalTemplateFields = JSON.parse(global);
+      this.globalTemplateFields = (JSON.parse(
+        global
+      ) as TemplateFieldApiModel[]).map(f => TemplateField.fromApi(f));
       this.csvFileJson = JSON.parse(json);
       this.setKeys();
       this.filterJson();
